@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bootstrap Material Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" th:href="@{css/style.default.css}" id="theme-stylesheet">
+</head>
+<body>
+<div class="page login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1>欢迎注册</h1>
+                            </div>
+                            <p>威威影院购票系统</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel    -->
+                <div class="col-lg-6 bg-white">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <div class="form-group">
+                                <input id="register-username" class="input-material" type="text" name="registerUsername"
+                                       placeholder="请输入用户名/姓名">
+                                <div class="invalid-feedback">
+                                    用户名必须在2~10位之间
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input id="register-password" class="input-material" type="password"
+                                       name="registerPassword" placeholder="请输入密码">
+                                <div class="invalid-feedback">
+                                    密码必须在6~10位之间
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input id="register-passwords" class="input-material" type="password"
+                                       name="registerPasswords" placeholder="确认密码">
+                                <div class="invalid-feedback">
+                                    两次密码必须相同 且在6~10位之间
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input id="register-email" class="input-material" type="email" name="registerEmail"
+                                       placeholder="请输入邮箱">
+                                <div class="invalid-feedback">
+                                    邮箱格式不正确,请重新输入
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input id="register-name" class="input-material" name="registerName"
+                                       placeholder="请输入名字">
+
+                            </div>
+                            <div class="form-group">
+                                <input id="register-tel" class="input-material" name="registerTelphone"
+                                       placeholder="请输入电话号码">
+                                <div class="invalid-feedback">
+                                    手机号码必须为11位
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                男<input class="control-label" type="radio" name="registergender" value="男">
+                                女<input class="control-label" type="radio" name="registergender" value="女">
+                            </div>
+
+                            <div class="form-group">
+                                <button id="btn" type="button" name="registerSubmit" class="btn btn-primary">注册</button>
+                            </div>
+                            <small>已有账号? </small><a th:href="@{/index}" class="signup">&nbsp;登录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- JavaScript files-->
+<script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/bootstrap.min.js"></script>
+<script>
+    $(function () {
+
+        /*错误class  form-control is-invalid
+        正确class  form-control is-valid*/
+        var flagName = false;
+        var flagPas = false;
+        var flagPass = false;
+        var flagEmail = false;
+        var flagTelphone = false;
+        /*验证用户名*/
+        var name, passWord, passWords;
+        $("#register-username").change(function () {
+            name = $("#register-username").val();
+            if (name.length < 2 || name.length > 10) {
+                $("#register-username").removeClass("form-control is-valid")
+                $("#register-username").addClass("form-control is-invalid");
+                flagName = false;
+            } else {
+                $("#register-username").removeClass("form-control is-invalid")
+                $("#register-username").addClass("form-control is-valid");
+                flagName = true;
+            }
+        })
+        /*验证密码*/
+
+        $("#register-password").change(function () {
+            passWord = $("#register-password").val();
+            if (passWord.length < 6 || passWord.length > 18) {
+                $("#register-password").removeClass("form-control is-valid")
+                $("#register-password").addClass("form-control is-invalid");
+                flagPas = false;
+            } else {
+                $("#register-password").removeClass("form-control is-invalid")
+                $("#register-password").addClass("form-control is-valid");
+                flagPas = true;
+            }
+        })
+        /*验证确认密码*/
+        $("#register-passwords").change(function () {
+            passWords = $("#register-passwords").val();
+            if ((passWord != passWords) || (passWords.length < 6 || passWords.length > 18)) {
+                $("#register-passwords").removeClass("form-control is-valid")
+                $("#register-passwords").addClass("form-control is-invalid");
+                flagPass = false;
+            } else {
+                $("#register-passwords").removeClass("form-control is-invalid")
+                $("#register-passwords").addClass("form-control is-valid");
+                flagPass = true;
+            }
+        })
+
+        /*验证邮箱*/
+        $("#register-email").change(function () {
+            var reg1 = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
+            passWords = $("#register-email").val();
+            if (!reg1.test(passWords)) {
+
+                $("#register-email").removeClass("form-control is-valid")
+                $("#register-email").addClass("form-control is-invalid");
+                flagEmail = false;
+            } else {
+
+                $("#register-email").removeClass("form-control is-invalid")
+                $("#register-email").addClass("form-control is-valid");
+                flagEmail = true;
+            }
+        })
+
+
+        $("#register-tel").change(function () {
+            passWords = $("#register-tel").val();
+            if (passWords.length != 11) {
+                $("register-tel").removeClass("form-control is-valid")
+                $("#register-tel").addClass("form-control is-invalid");
+                flagTelphone = false;
+            } else {
+                $("#register-tel").removeClass("form-control is-invalid")
+                $("#register-tel").addClass("form-control is-valid");
+                flagTelphone = true;
+            }
+        })
+
+        $("#btn").click(function () {
+            if (flagName && flagPas && flagPass && flagEmail && flagTelphone) {
+                var data = {
+                    "userId": $("#register-username").val(),
+                    "userEmail": $("#register-email").val(),
+                    "userPwd": $("#register-password").val(),
+                    "userName": $("#register-name").val(),
+                    "userPhone": $("#register-tel").val(),
+                    "userGender": $('input[name="registergender"]:checked').val()
+                };
+                //当使用post请求发送过去的时候,
+                $.ajax({
+                    type: 'post',
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify(data),
+                    url: '/resist',
+                    async: true,
+                    dataType: "json",
+                    success: function (obj) {
+                        if (obj.code == 0) {
+                            alert(obj.message);
+                        }
+                        if (obj.code == 1) {
+                            alert(obj.message);
+                        }
+                        if (obj.code == 2) {
+                            alert(obj.message);
+                        }
+                    },
+                    error: function (obj) {
+                        alert("数据失败交互")
+                        alert(obj.message)
+                    }
+
+                })
+
+            } else {
+                if (!flagName) {
+                    $("#register-username").addClass("form-control is-invalid");
+                }
+                if (!flagPas) {
+                    $("#register-password").addClass("form-control is-invalid");
+                }
+                if (!flagPass) {
+                    $("#register-passwords").addClass("form-control is-invalid");
+                }
+                if (!flagTelphone) {
+                    $("register-tel").addClass("form-control is-invalid");
+                }
+
+            }
+        })
+    })
+</script>
+</body>
+</html>

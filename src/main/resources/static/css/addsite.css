@@ -1,0 +1,22 @@
+table td {
+    height: 50px;
+    width: 150px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.right {
+    float: left;
+}
+
+.left {
+    float: left;
+}
+
+.intro {
+    background-color: red;
+}
+
+#laycontent div{
+    background-color: #1c7430;
+}

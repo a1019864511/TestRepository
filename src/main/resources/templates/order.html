@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <title>威威影院管理系统</title>
+    <script src="/webjars/jquery/3.4.1/jquery.js"></script>
+    <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css">
+    <script src="/webjars/layui/2.5.6/layui.js"></script>
+    <script th:inline="javascript">
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use('element', function(){
+            var element = layui.element;
+        });
+        layui.use('table', function(){
+            var table = layui.table;
+            table.on('tool(demo)', function(obj){
+                var data = obj.data;
+                if(obj.event === 'pay'){
+                    layer.msg('ID：'+data.orderId+ ' 的查看操作');
+                }
+                else if(obj.event === 'refund'){
+                        layer.confirm('真的删除行么', function(index){
+                        layer.msg('ID：'+ data.orderId + ' 的查看操作');
+                        obj.del();
+                        layer.close(index);
+                    });
+                }
+                else if(obj.event === 'del'){
+                    layer.confirm('真的确定要删除这个订单吗', function(index){
+                        layer.msg('ID：'+ data.orderId + ' 的查看操作');
+                        // $.ajax({
+                        //     type: 'post',
+                        //     url: '/delorder',
+                        //     async: true,
+                        //     datatype: "json",
+                        //     data: {"orderID":data.orderId},
+                        //     success: function (obj) {
+                        //         layer.msg('订单号：'+ data.orderId + '已经成功删除');
+                        //     },
+                        //     error: function (obj) {
+                        //         alert("交互失败")
+                        //     }
+                        // })
+                        obj.del();
+                        layer.close(index);
+                   });
+                }
+
+            })
+
+    </script>
+</head>
+<body class="layui-layout-body">
+
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" th:include="vidon::copyright"></div>
+    <div class="layui-side layui-bg-black" th:include="vidon::copyrighttwo"></div>
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div >
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>历史订单</legend>
+            </fieldset>
+            <div id="demo0"></div>
+        </div>
+
+        <table class="layui-table" lay-data="{cellMinWidth: 80, height:330, url:'/dataOrder/123', id:'idTest'}" lay-filter="demo">
+            <thead>
+            <tr>
+                <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+                <th lay-data="{field:'orderId', sort: true, fixed: true}">ID</th>
+                <th lay-data="{field:'orderImgsrc', sort: true,templet:'#imgsrc'}">电影图片</th>
+                <th lay-data="{field:'userId',}">用户名</th>
+                <th lay-data="{field:'orderCreateTime',sort:true,width:300}">创建时间</th>
+                <th lay-data="{field:'movieName', }">电影名字</th>
+                <th lay-data="{field:'userPrice', }">用户价格</th>
+                <th lay-data="{field:'orderSite',  sort: true}">订单位置</th>
+                <th lay-data="{field:'orderStatus', templet:'#sexTpl'}">订单状态</th>
+                <th lay-data="{fixed: 'right',  align:'center', toolbar: '#barDemo',width:250}"></th>
+            </tr>
+            </thead>
+        </table>
+        <script type="text/html" id="imgsrc">
+            <img src="/img/{{d.orderImgsrc}}"/>
+        </script>
+        <script type="text/html" id="sexTpl">
+            {{#  if(d.orderStatus === 0){ }}
+            <span style="color: #F581B1;">未付款</span>
+            {{#  } else { }}
+                付款
+            {{#  } }}
+        </script>
+
+        <script type="text/html" id="barDemo">
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="pay">付款</a>
+            <a class="layui-btn layui-btn-xs" lay-event="refund">退款</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
+
+    </div>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        威威影院
+    </div>
+</div>
+</body>
+</html>
