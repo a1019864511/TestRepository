@@ -57,7 +57,6 @@ public class MovieController {
         int movieId= Integer.parseInt(id);
         try{
            //把String对象转换成int对象
-
             int userID = Integer.parseInt(userId);
             //往middle表里面插入一条记录
             middleMapper.insertSiteByMovieIdUserid(movieId,userID,movieSite);
@@ -83,7 +82,6 @@ public class MovieController {
         }
         Movie movie= moviemapper.getMovieByid(movieId);
         return movie.getMovieSite();
-
 
     }
 

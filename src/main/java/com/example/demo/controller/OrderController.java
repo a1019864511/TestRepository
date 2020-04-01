@@ -55,10 +55,38 @@ public class OrderController {
     }
 
     @ResponseBody
-    @RequestMapping("/delorder")
-    public String delOrder(@RequestParam("orderID") String orderId){
+    @RequestMapping("/pay")
+    public String payOrder(@RequestParam("orderID") String orderId){
         try{
+            orderMapper.updateOrder(orderId);
+        }catch (Exception e){
+            return "付款失败";
+        }
+        return "付款成功";
+    }
 
+    @ResponseBody
+    @RequestMapping("/delorder")
+    public String delOrder(@RequestParam("orderID")  String orderId,
+                           @RequestParam("movieID")  String movieId){
+        try{
+            Order order=orderMapper.getOrderById(orderId);
+            String site=order.getOrderSite();
+            Movie movie=movieMapper.getMovieByid(Integer.parseInt(movieId));
+            String movieSite=movie.getMovieSite();
+            movieSite=movieSite.replaceAll(site,"");
+            movieMapper.updateMovieSite(movieSite,Integer.parseInt(movieId));
+            orderMapper.delOrder(orderId);
+        }catch (Exception e){
+            return "执行失败";
+        }
+        return "执行成功";
+    }
+
+    @ResponseBody
+    @RequestMapping("/Exitorder")
+    public String exitOrder(@RequestParam("orderID")  String orderId){
+        try{
             orderMapper.delOrder(orderId);
         }catch (Exception e){
             return "执行失败";
