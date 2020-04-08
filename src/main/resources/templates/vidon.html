@@ -26,9 +26,9 @@
         <div class="layui-logo">威威影院</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">个人资料</a></li>
+            <li class="layui-nav-item"><a th:href="@{'/updateUser/'+${session.user}}">个人资料</a></li>
             <li class="layui-nav-item"><a href="/vidon">商品页面</a></li>
-            <li class="layui-nav-item"><a th:href="@{/historyOrder}">历史订单</a></th></li>
+            <li class="layui-nav-item"><a th:href="@{'/historyOrder'}">历史订单</a></th></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">其它系统</a>
                 <dl class="layui-nav-child">
@@ -95,7 +95,6 @@
         <div class="layui-container">
             <div class="layui-row layui-col-space20 layui-col-md-offset3" id="laycontent">
             <div class="layui-col-md4" th:each="movie:${List}">
-
                 <div class="layui-col-md8"><img th:src="@{'/img/'+${movie.getMovieImgsrc()}}"/></div>
                 <div class="layui-col-md4">
 <!--                    <h3><span>影片:</span><span th:text="${Movie.getMovieName()}"></span></h3>-->
@@ -106,7 +105,6 @@
                     <div><a th:href="@{'/shop/'+${movie.movieId}}" class="layui-btn layui-btn-normal">选购影片</a></div>
                  </div>
             </div>
-
         </div>
 
 

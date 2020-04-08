@@ -5,6 +5,7 @@ import com.example.demo.Entity.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,6 +24,12 @@ public interface orderMapper {
     @Select("select * from `order` where user_id = #{userid}")
     List<Order> getOrderList(String userid);
 
+    @Select("select * from `order` where order_id =#{id}")
+    Order getOrderById(String id);
+
     @Delete("delete from `order` where order_id =#{orderId}")
     void delOrder(String orderId);
+
+    @Update("update  `order` set order_status =1 where order_id =#{orderId}")
+    void updateOrder(String orderId);
 }

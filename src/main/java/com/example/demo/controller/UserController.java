@@ -5,6 +5,7 @@ import com.example.demo.Entity.ReturnData;
 import com.example.demo.Entity.User;
 import com.example.demo.Mapper.MovieMapper;
 import com.example.demo.Mapper.UserMapper;
+import com.example.demo.Mapper.discussMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,14 +23,15 @@ public class UserController {
     //userMapper
     @Autowired
     UserMapper usermaaper;
-
+    @Autowired
+    discussMapper discussMapper;
     //首页
     @RequestMapping("/index")
     public String index() {
         return "index";
     }
 
-    //注册
+    //跳转到注册页面
     @RequestMapping("/register")
     public String register() {
         return "register";
@@ -41,7 +43,7 @@ public class UserController {
         return "addUser";
     }
 
-
+    //注册用户填写的方法
     @ResponseBody
     @PostMapping("/resist")
     public ReturnData resist(@RequestBody User user) {
@@ -91,5 +93,13 @@ public class UserController {
         data.setMessage("密码错误");
         data.setCode("2");
         return data;
+    }
+
+    @RequestMapping("/updateUser/{UserID}")
+    public String updateUser(@PathVariable("UserID") String id,Model model){
+        System.out.println("ID为"+id);
+        User user=usermaaper.getUserByid(id);
+        model.addAttribute("user",user);
+        return "UserUpdate";
     }
 }

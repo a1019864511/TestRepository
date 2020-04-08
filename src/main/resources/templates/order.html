@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <title>威威影院管理系统</title>
+    <style type ="text/css">
+        .layui-table-cell{
+            height:auto !important;
+            width: auto;
+        }
+    </style>
     <script src="/webjars/jquery/3.4.1/jquery.js"></script>
     <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css">
     <script src="/webjars/layui/2.5.6/layui.js"></script>
@@ -12,43 +18,92 @@
         layui.use('element', function(){
             var element = layui.element;
         });
-        layui.use('table', function(){
+        layui.use('table', function() {
             var table = layui.table;
-            table.on('tool(demo)', function(obj){
+            table.on('tool(demo)', function (obj) {
                 var data = obj.data;
-                if(obj.event === 'pay'){
-                    layer.msg('ID：'+data.orderId+ ' 的查看操作');
-                }
-                else if(obj.event === 'refund'){
-                        layer.confirm('真的删除行么', function(index){
-                        layer.msg('ID：'+ data.orderId + ' 的查看操作');
+                if (obj.event === 'pay') {
+                    if(data.orderStatus == 1){
+                        layer.msg("这条订单已经付款")
+                    }else{
+                        layer.open({
+                            type:1,
+                            content:'<img width=225 height=305  src="img/weixinpay.jpg"/>'
+                        })
+                        $.ajax({
+                            type: 'post',
+                            url: '/pay',
+                            async: true,
+                            datatype: "json",
+                            data: {"orderID": data.orderId},
+                            success: function (obj) {
+                            },
+                            error: function (obj) {
+                                alert("交互失败")
+                            }
+                        })
+                    }
+
+                    // $.ajax({
+                    //     type: 'post',
+                    //     url: '/pay',
+                    //     async: true,
+                    //     datatype: "json",
+                    //     data: {"orderID": data.orderId},
+                    //     success: function (obj) {
+                    //         layer.open({
+                    //             type:1,
+                    //             content:'<img src="img/weixinpay.jpg"/>'
+                    //
+                    //         })
+                    //     },
+                    //     error: function (obj) {
+                    //         alert("交互失败")
+                    //     }
+                    // })
+
+                } else if (obj.event === 'refund') {
+                        layer.confirm('真的要确定退款吗', function (index) {
+                        layer.msg('ID：' + data.orderId + ' 的查看操作');
+                            $.ajax({
+                                type: 'post',
+                                url: '/Exitorder',
+                                async: true,
+                                datatype: "json",
+                                data: {"orderID": data.orderId},
+                                success: function (obj) {
+
+                                },
+                                error: function (obj) {
+                                    alert("交互失败")
+                                }
+                            })
+                            obj.del();
+                            layer.close(index);
+                    });
+                } else if (obj.event === 'del') {
+                    layer.confirm('真的确定要删除这个订单吗', function (index) {
+                        layer.msg('ID：' + data.orderId + ' 的查看操作');
+                        $.ajax({
+                            type: 'post',
+                            url: '/delorder',
+                            async: true,
+                            datatype: "json",
+                            data: {"orderID": data.orderId,"movieID":data.movieId},
+                            success: function (obj) {
+                                layer.msg('订单号：' + data.orderId + '已经成功删除');
+                            },
+                            error: function (obj) {
+                                layer.msg('订单号：' + data.orderId + '删除失败');
+                            }
+                        })
                         obj.del();
                         layer.close(index);
                     });
                 }
-                else if(obj.event === 'del'){
-                    layer.confirm('真的确定要删除这个订单吗', function(index){
-                        layer.msg('ID：'+ data.orderId + ' 的查看操作');
-                        // $.ajax({
-                        //     type: 'post',
-                        //     url: '/delorder',
-                        //     async: true,
-                        //     datatype: "json",
-                        //     data: {"orderID":data.orderId},
-                        //     success: function (obj) {
-                        //         layer.msg('订单号：'+ data.orderId + '已经成功删除');
-                        //     },
-                        //     error: function (obj) {
-                        //         alert("交互失败")
-                        //     }
-                        // })
-                        obj.del();
-                        layer.close(index);
-                   });
-                }
 
-            })
-
+            });
+        })
     </script>
 </head>
 <body class="layui-layout-body">
@@ -66,24 +121,28 @@
             <div id="demo0"></div>
         </div>
 
-        <table class="layui-table" lay-data="{cellMinWidth: 80, height:330, url:'/dataOrder/123', id:'idTest'}" lay-filter="demo">
+        <table class="layui-table" lay-data="{ url:'/dataOrder/123', id:'idTest'}" lay-filter="demo">
             <thead>
             <tr>
-                <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-                <th lay-data="{field:'orderId', sort: true, fixed: true}">ID</th>
+                <th lay-data="{type:'checkbox',}"></th>
+                <th lay-data="{field:'orderId', sort: true}">ID</th>
                 <th lay-data="{field:'orderImgsrc', sort: true,templet:'#imgsrc'}">电影图片</th>
                 <th lay-data="{field:'userId',}">用户名</th>
-                <th lay-data="{field:'orderCreateTime',sort:true,width:300}">创建时间</th>
+                <th lay-data="{field:'orderCreateTime',sort:true,width:200,templet:'#movieTime'}">创建时间</th>
                 <th lay-data="{field:'movieName', }">电影名字</th>
                 <th lay-data="{field:'userPrice', }">用户价格</th>
+                <th lay-data="{field:'movieId', }">电影id</th>
                 <th lay-data="{field:'orderSite',  sort: true}">订单位置</th>
                 <th lay-data="{field:'orderStatus', templet:'#sexTpl'}">订单状态</th>
-                <th lay-data="{fixed: 'right',  align:'center', toolbar: '#barDemo',width:250}"></th>
+                <th lay-data="{ align:'center', toolbar: '#barDemo',width:250}"></th>
             </tr>
             </thead>
         </table>
         <script type="text/html" id="imgsrc">
-            <img src="/img/{{d.orderImgsrc}}"/>
+            <img  src="/img/{{d.orderImgsrc}}"/>
+        </script>
+        <script type="text/html" id="movieTime">
+            <div>{{layui.util.toDateString(d.orderCreateTime, 'yyyy-MM-dd HH:mm:ss')}}</div>
         </script>
         <script type="text/html" id="sexTpl">
             {{#  if(d.orderStatus === 0){ }}
@@ -92,6 +151,7 @@
                 付款
             {{#  } }}
         </script>
+
 
         <script type="text/html" id="barDemo">
             <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="pay">付款</a>

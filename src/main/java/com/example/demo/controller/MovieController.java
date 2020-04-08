@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.Entity.Discuss;
 import com.example.demo.Entity.Movie;
 import com.example.demo.Entity.Order;
 import com.example.demo.Mapper.MovieMapper;
 import com.example.demo.Mapper.middleMapper;
 import com.example.demo.Mapper.orderMapper;
+import com.example.demo.Mapper.discussMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author xing.liu
@@ -23,11 +26,15 @@ import java.util.Date;
 public class MovieController {
     @Autowired
     MovieMapper moviemapper;
+
     @Autowired
     middleMapper middleMapper;
 
     @Autowired
     orderMapper orderMapper;
+
+    @Autowired
+    discussMapper discussMapper;
 
 
     @RequestMapping("/vidon")
@@ -39,6 +46,11 @@ public class MovieController {
    @RequestMapping("/shop/{id}")
     public String shop(@PathVariable("id") int id, Model model) {
             model.addAttribute("movie",moviemapper.getMovieByid(id));
+            model.addAttribute("discuss",discussMapper.getAllDiscussByMovieId(id));
+             List<Discuss> lis =   discussMapper.getAllDiscussByMovieId(id);
+             for(Discuss li:lis){
+                 System.out.println(li.getDiscuss());
+             }
             return "addUser";
     }
 

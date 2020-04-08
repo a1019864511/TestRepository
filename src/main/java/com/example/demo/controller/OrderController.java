@@ -37,7 +37,6 @@ public class OrderController {
     public Table getOrderListById(@PathVariable("id") String id){
         List<Order> orderLis= orderMapper.getOrderList(id);
         //循环获取根据电影id获取电影名字
-
         for(Order order:orderLis){
             Movie movie=movieMapper.getMovieByid((int)order.getMovieId());
             String name=movie.getMovieName();
@@ -65,6 +64,7 @@ public class OrderController {
         return "付款成功";
     }
 
+
     @ResponseBody
     @RequestMapping("/delorder")
     public String delOrder(@RequestParam("orderID")  String orderId,
@@ -80,17 +80,20 @@ public class OrderController {
         }catch (Exception e){
             return "执行失败";
         }
+
         return "执行成功";
     }
+
 
     @ResponseBody
     @RequestMapping("/Exitorder")
     public String exitOrder(@RequestParam("orderID")  String orderId){
         try{
             orderMapper.delOrder(orderId);
-        }catch (Exception e){
+           }catch (Exception e){
             return "执行失败";
-        }
+           }
         return "执行成功";
+
     }
 }

@@ -130,11 +130,11 @@
                 </div>
             </div>
         </div>
-        <div >
+        <div style="overflow: hidden">
             <div class="layui-col-md2 layui-col-lg-offset1"><img th:src="@{'/img/'+${movie.movieImgsrc}}"/></div>
             <div class="layui-col-md2">
                 <!--                    <h3><span>影片:</span><span th:text="${Movie.getMovieName()}"></span></h3>-->
-                <div><span>影片:</span ><span th:text="${movie.movieName}"></span></div>
+                <div><span>名字:</span ><span th:text="${movie.movieName}"></span></div>
                 <div><span>播放时间:</span ><span th:text="${movie.movieTime}"></span></div>
                 <div><span>导演:</span><span th:text="${movie.movieDirect}"></span></div>
                 <div><span>演员:</span><span th:text="${movie.movieActor}"></span></div>
@@ -145,22 +145,28 @@
                 <span>已选座位</span>
                 <hr class="layui-bg-red">
                 <div id="tianjia">
-
-
                 </div>
             </div>
 
             <div  class="layui-col-md2 layui-col-lg-offset1" style="border: 1px solid red;height:200px;width: 200px;overflow: auto">
-                <span>PRIce</span>
+                <span>总价格</span>
                 <hr class="layui-bg-red">
-                <div id="price"></div>
+                <div id="price" style="font-size: 40px;height:60%"></div>
+                <div><a id="login" class="layui-btn" style="margin-left: 50px"  href="#"/>提交</a></div>
             </div>
 
         </div>
+        <div>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>观看评论</legend>
+            </fieldset>
+            <div th:each="Discuss:${discuss}">
+                <div> 用户名:<span th:text="${Discuss.userId}"></span></div>
+                <span th:text="${Discuss.discuss}"></span>
+            </div>
+        </div>
 
-        <div><a id="login" class="layui-btn" href="#">提交</a></div>
-
-         <div class="layui-footer">
+        <div class="layui-footer">
         <!-- 底部固定区域 -->
         威威影院
          </div>

@@ -16,7 +16,6 @@ public interface middleMapper {
    @Update("update middle set site =#{site} where movie_id = #{movieId} and user_id =#{userId}")
    void updateSiteByMovieIdUserid(int movieId,String userId,String site);
 
-
    @Insert("insert into middle VALUES(#{movieId},#{site},#{userId})")
    void insertSiteByMovieIdUserid(int movieId,int userId,String site);
 }

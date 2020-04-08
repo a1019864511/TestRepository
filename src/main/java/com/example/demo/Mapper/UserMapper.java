@@ -20,6 +20,7 @@ public interface UserMapper {
     @Insert("insert into user values (#{userId},#{userEmail},#{userPwd},#{userName},#{userPhone},#{userMoney},#{userGender})")
     void insertUser(User user);
 
+
     @Select("select * from user where user_id = #{id}")
     User getUserByid(String id);
 

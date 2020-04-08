@@ -78,7 +78,7 @@ public class  Movie {
   public void setMovieDirect(String movieDirect) {
     this.movieDirect = movieDirect;
   }
-
+  //得到电影站点ID的方法
   public long getSiteId() {
     return siteId;
   }
@@ -86,15 +86,15 @@ public class  Movie {
   public void setSiteId(long siteId) {
     this.siteId = siteId;
   }
-
+  //电影区域返回的方法
   public String getMovieArea() {
     return movieArea;
   }
-
+  //设置电影播放区域
   public void setMovieArea(String movieArea) {
     this.movieArea = movieArea;
   }
-
+  //得到电影的播放时间
   public String getMovieTime() {
     return movieTime;
   }
@@ -102,7 +102,7 @@ public class  Movie {
   public void setMovieTime(String movieTime) {
     this.movieTime = movieTime;
   }
-
+  //得到电影的图片
   public String getMovieImgsrc() {
     return movieImgsrc;
   }

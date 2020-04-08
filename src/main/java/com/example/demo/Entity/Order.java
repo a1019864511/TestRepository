@@ -61,7 +61,6 @@ public class Order {
     this.userId = userId;
   }
 
-
   public java.sql.Timestamp getOrderCreateTime() {
     return orderCreateTime;
   }
@@ -69,7 +68,6 @@ public class Order {
   public void setOrderCreateTime(java.sql.Timestamp orderCreateTime) {
     this.orderCreateTime = orderCreateTime;
   }
-
 
   public long getMovieId() {
     return movieId;
@@ -89,6 +87,7 @@ public class Order {
   }
 
   @Override
+  //重写订单的 toString 方法
   public String toString() {
     return "Order{" +
             "orderId=" + orderId +
