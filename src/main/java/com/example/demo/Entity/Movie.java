@@ -14,9 +14,17 @@ public class  Movie {
   private String movieImgsrc;
   private String movieSite;
   private String moviePrice;
-
+  private String movieKind;
   public String getMoviePrice() {
     return moviePrice;
+  }
+
+  public String getMovieKind() {
+    return movieKind;
+  }
+
+  public void setMovieKind(String movieKind) {
+    this.movieKind = movieKind;
   }
 
   public void setMoviePrice(String moviePrice) {

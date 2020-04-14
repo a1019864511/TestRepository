@@ -27,6 +27,7 @@ public class OrderController {
 
     @Autowired
     MovieMapper movieMapper;
+
     @RequestMapping("/historyOrder")
     public String getOrder(){
         return "order";
@@ -80,7 +81,6 @@ public class OrderController {
         }catch (Exception e){
             return "执行失败";
         }
-
         return "执行成功";
     }
 

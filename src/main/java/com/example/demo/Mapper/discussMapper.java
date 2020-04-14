@@ -15,9 +15,7 @@ import java.util.List;
 @Repository
 public interface discussMapper {
 
-    @Select("select * from discuss where movie_id =#{movieId}")
+    @Select("select * from discuss as  d,`user` as  u where d.user_id=u.user_id and movie_id=#{movieId}")
     List<Discuss> getAllDiscussByMovieId(int movieId);
-
-
 
 }

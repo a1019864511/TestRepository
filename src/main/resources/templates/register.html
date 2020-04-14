@@ -148,7 +148,6 @@
             var reg1 = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
             passWords = $("#register-email").val();
             if (!reg1.test(passWords)) {
-
                 $("#register-email").removeClass("form-control is-valid")
                 $("#register-email").addClass("form-control is-invalid");
                 flagEmail = false;

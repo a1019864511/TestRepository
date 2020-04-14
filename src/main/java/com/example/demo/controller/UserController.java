@@ -86,6 +86,7 @@ public class UserController {
         if (checkUser.getUserPwd().equals(password)) {
             session.setAttribute("name", "login");
             session.setAttribute("user", checkUser.getUserName());
+            session.setAttribute("userbyid", checkUser.getUserId());
             data.setMessage("成功登陆");
             data.setCode("1");
             return data;
@@ -99,7 +100,16 @@ public class UserController {
     public String updateUser(@PathVariable("UserID") String id,Model model){
         System.out.println("ID为"+id);
         User user=usermaaper.getUserByid(id);
-        model.addAttribute("user",user);
+        System.out.println(user.toString());
+        model.addAttribute( "usershow",user);
+        return "UserUpdate";
+    }
+    @RequestMapping("/UserUpdateImg/{UserID}")
+    public String updateUserImg(@PathVariable("UserID") String id,Model model){
+        System.out.println("ID为"+id);
+        User user=usermaaper.getUserByid(id);
+        System.out.println(user.toString());
+        model.addAttribute( "usershow",user);
         return "UserUpdate";
     }
 }

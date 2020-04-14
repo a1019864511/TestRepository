@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+
+
     <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css"/>
     <script src="/webjars/layui/2.5.6/layui.js"></script>
     <script>
         //注意：导航 依赖 element 模块，否则无法进行功能性操作
         layui.use('element', function(){
             var element = layui.element;
-
         });
 
     </script>
@@ -19,6 +20,7 @@
         $(function(){
             var count=0;
             var ok = [[${movie.movieSite}]];
+
            $('button').each(function(){
                //绑定每一个按钮,判断座位字符串里面是否包含
                if(ok.indexOf($(this).text())>=0){
@@ -26,21 +28,22 @@
                }
            })
             $('.layui-table  button').click(function(){
+
                 $(this).toggleClass("layui-btn-warm");
                 var text="";
                 count=0;
                 $('.layui-table button').each(function(){
                     if($(this).hasClass('layui-btn-warm') && !$(this).hasClass('layui-btn-disabled')){
                         count++;
-                        text+='<button style="margin: 2px"class="layui-btn">'+ $(this).html() +'</button>';
+                        text+='<button style="margin: 2px" class="layui-btn">'+ $(this).html() +'</button>';
                     }
                 })
                 $('#tianjia').html(text);
                 $('#price').text([[${movie.moviePrice}]]*count);
-
             })
 
-            $('#login').click(function() {
+            $('#login').click(function(){
+                alert([[${movie.movieId}]])
                 var site=$('#tianjia').text();
                 $.ajax({
                     type: 'post',
@@ -56,7 +59,6 @@
                                 $(this).addClass("layui-btn-disabled");
                             }
                         })
-
                     },
                     error: function (obj) {
                         alert("交互失败")
@@ -80,7 +82,8 @@
             <div class="layui-row layui-col-space10">
                 <div class="layui-col-md9 layui-col-lg-offset1">
                     <table class="layui-table" style="text-align: center">
-                        <tr><td><button class="layui-btn">1排1座</button></td>
+                        <tr>
+                            <td><button class="layui-btn">1排1座</button></td>
                             <td><button class="layui-btn">1排2座</button></td>
                             <td><button class="layui-btn">1排3座</button></td>
                             <td><button class="layui-btn">1排4座</button></td>
@@ -89,7 +92,8 @@
                             <td><button class="layui-btn">1排7座</button></td>
                             <td><button class="layui-btn">1排8座</button></td>
                         </tr>
-                        <tr><td><button class="layui-btn">2排1座</button></td>
+                        <tr>
+                            <td><button class="layui-btn">2排1座</button></td>
                             <td><button class="layui-btn">2排2座</button></td>
                             <td><button class="layui-btn">2排3座</button></td>
                             <td><button class="layui-btn">2排4座</button></td>
@@ -134,11 +138,13 @@
             <div class="layui-col-md2 layui-col-lg-offset1"><img th:src="@{'/img/'+${movie.movieImgsrc}}"/></div>
             <div class="layui-col-md2">
                 <!--                    <h3><span>影片:</span><span th:text="${Movie.getMovieName()}"></span></h3>-->
-                <div><span>名字:</span ><span th:text="${movie.movieName}"></span></div>
+                <div><span style="color: red;font-size:18px" th:text="${movie.movieName}"></span></div>
+                <div><span>电影片名:</span ><span th:text="${movie.movieTime}"></span></div>
                 <div><span>播放时间:</span ><span th:text="${movie.movieTime}"></span></div>
                 <div><span>导演:</span><span th:text="${movie.movieDirect}"></span></div>
                 <div><span>演员:</span><span th:text="${movie.movieActor}"></span></div>
-                <div><span>影片简介:</span><span th:text="${movie.movieIntroduce}"></span></div>
+                <div><span>影片简介:</span>
+                    <span th:text="${movie.movieIntroduce}"></span></div>
                 <div><span>影片价格:</span><span th:text="${movie.moviePrice}"></span></div>
             </div>
             <div  class="layui-col-md2 " style="border: 1px solid red;height:200px;width: 200px;overflow: auto">
@@ -160,17 +166,36 @@
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
                 <legend>观看评论</legend>
             </fieldset>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">文本域</label>
+                <div class="layui-input-block">
+                    <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+            </div>
             <div th:each="Discuss:${discuss}">
-                <div> 用户名:<span th:text="${Discuss.userId}"></span></div>
-                <span th:text="${Discuss.discuss}"></span>
+                <div class="layui-col-md1">
+                <img  width="60" height="60" th:src="${Discuss.getUserImgsrc()}"></img>
+                </div>
+                <div class="layui-col-md10">
+                <div><span style="color: red;font-size: 20px" th:text="${Discuss.userId}"></span></div>
+                <div style="color: grey" th:text="${Discuss.discussTime}"></div>
+                <blockquote class="layui-elem-quote layui-quote-nm" th:text="${Discuss.discuss}">引用区域的文字</blockquote>
+                </div>
+                <hr/>
             </div>
         </div>
-
         <div class="layui-footer">
         <!-- 底部固定区域 -->
         威威影院
          </div>
+
+
     </div>
+
+
+
 </div>
 </body>
 </html>

@@ -10,7 +10,7 @@
         })
     </script>
     <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css">
-    <link rel="stylesheet" href="/css/addsite.css">
+<!--    <link rel="stylesheet" href="/css/addsite.css">-->
     <script src="/webjars/layui/2.5.6/layui.js"></script>
     <script>
         //注意：导航 依赖 element 模块，否则无法进行功能性操作
@@ -26,7 +26,7 @@
         <div class="layui-logo">威威影院</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a th:href="@{'/updateUser/'+${session.user}}">个人资料</a></li>
+            <li class="layui-nav-item"><a th:href="@{'/updateUser/'+${session.userbyid}}">个人资料</a></li>
             <li class="layui-nav-item"><a href="/vidon">商品页面</a></li>
             <li class="layui-nav-item"><a th:href="@{'/historyOrder'}">历史订单</a></th></li>
             <li class="layui-nav-item">
@@ -58,12 +58,15 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
+                    <a class="" href="javascript:;">电影分类</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="/vidon/爱情片">爱情片</a></dd>
+                        <dd><a href="/vidon/动作片;">动作片</a></dd>
+                        <dd><a href="/vidon/科幻片;">科幻片</a></dd>
+                        <dd><a href="/vidon/悬疑片;">悬疑片</a></dd>
+                        <dd><a href="/vidon/喜剧片;">喜剧片</a></dd>
+                        <dd><a href="/vidon/战争片;">战争片</a></dd>
+                        <dd><a href="/vidon/恐怖片;">恐怖片</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -97,7 +100,7 @@
             <div class="layui-col-md4" th:each="movie:${List}">
                 <div class="layui-col-md8"><img th:src="@{'/img/'+${movie.getMovieImgsrc()}}"/></div>
                 <div class="layui-col-md4">
-<!--                    <h3><span>影片:</span><span th:text="${Movie.getMovieName()}"></span></h3>-->
+                    <h3><span>影片:</span><span th:text="${movie.movieName}"></span></h3>
                     <div><span>播放时间:</span ><span th:text="${movie.movieTime}"></span></div>
                     <div><span>导演:</span><span th:text="${movie.movieDirect}"></span></div>
                     <div><span>演员:</span><span th:text="${movie.movieActor}"></span></div>

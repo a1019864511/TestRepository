@@ -5,15 +5,41 @@ public class Discuss {
 
   private long userId;
   private long movieId;
-  private String discuss;
+  private String discusss;
+  private String userImgsrc;
+  private String discussTime;
+
+  public String getDiscusss() {
+    return discusss;
+  }
+
+  public void setDiscusss(String discusss) {
+    this.discusss = discusss;
+  }
+
+  public String getDiscussTime() {
+    return discussTime;
+  }
+
+  public void setDiscussTime(String discussTime) {
+    this.discussTime = discussTime;
+  }
 
   @Override
   public String toString() {
     return "Discuss{" +
             "userId=" + userId +
             ", movieId=" + movieId +
-            ", discuss='" + discuss + '\'' +
+            ", discuss='" + discusss + '\'' +
             '}';
+  }
+
+  public String getUserImgsrc() {
+    return userImgsrc;
+  }
+
+  public void setUserImgsrc(String userImgsrc) {
+    this.userImgsrc = userImgsrc;
   }
 
   public long getUserId() {
@@ -33,10 +59,10 @@ public class Discuss {
   }
 
   public String getDiscuss() {
-    return discuss;
+    return discusss;
   }
 
   public void setDiscuss(String discuss) {
-    this.discuss = discuss;
+    this.discusss = discuss;
   }
 }

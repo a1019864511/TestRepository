@@ -14,6 +14,15 @@ public class User {
     private String userPhone;
     private double userMoney;
     private String userGender;
+    private String userImgsrc;
+
+    public String getUserImgsrc() {
+        return userImgsrc;
+    }
+
+    public void setUserImgsrc(String userImgsrc) {
+        this.userImgsrc = userImgsrc;
+    }
 
     @Override
     public String toString() {
