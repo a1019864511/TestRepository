@@ -18,10 +18,10 @@ public class TestUtils {
 
     public static Connection getConnection() {
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = (Connection) DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Class.forName( "com.microsoft.sqlserver.jdbc.SQLServerDriver" );
+            connection = (Connection) DriverManager.getConnection( DB_URL, DB_USER, DB_PASSWORD );
         } catch (Exception e) {
-            System.out.println("加载驱动失败!");
+            System.out.println( "加载驱动失败!" );
             e.printStackTrace();
         }
         return connection;
@@ -30,26 +30,27 @@ public class TestUtils {
 
     /**
      * 关闭数据库
+     *
      * @param connection
      * @param preparedStatement
      * @param resultSet
      */
-    public static void close(Connection connection,PreparedStatement preparedStatement,ResultSet resultSet) {
-        if(resultSet != null) {
+    public static void close(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
+        if (resultSet != null) {
             try {
                 resultSet.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if(preparedStatement != null) {
+        if (preparedStatement != null) {
             try {
                 preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if(connection != null) {
+        if (connection != null) {
             try {
                 connection.close();
             } catch (SQLException e) {

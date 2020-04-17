@@ -1,0 +1,34 @@
+     //代码重构的时候如果超过5个入参就尽量不要重构
+	//禁止在循环里面新建对象
+
+	//RABBITMQ 简单队列 默认将消息顺序发送给下一个消费者，每一个消费者获得相同消息。轮询分布
+	//thymeleaf模板解析的时候会连注释一起解析
+	//MultipartFile file 使用transferTo方法的时候,一个类里面只能使用一次，如果使用第二次会抛异常(解决方法,将流保存为相同的文件，
+	// 如果有文件异常)
+	//layui获取表单对象的值的时候 是以name属性去取值的
+	//layui和thymeleaf联合使用的时候一定要特别注意，注意layui里面出现[[]]的时候。thymeleaf会误加载。从而导致解析异常
+
+     RABBITMQ地址
+	//http://127.0.0.1:15672/#/queues/testhost/q_test_02
+
+	//在layui框架 里面 使用[[${usershow.userName}]]必须在script脚本里面加上<script th:inline="javascript">
+	//, contentType: 'application/json;charset=utf-8'  后台使用对象接收时,必须加上contentType才能保证让后台接受
+
+
+	2020/4/16
+	work模式
+	使用公平分发，必须关闭自动应答，改为手动应答。
+       work模式能者多劳
+
+    订阅者模式
+    消息发送到没有队列绑定的交换机时，消息将丢失，因为，交换机没有存储消息的能力，消息只能存在在队列中。
+
+
+    交换机(Exchange)
+    交换机的功能主要是接收消息并且转发到绑定的队列，交换机不存储消息，在启用ack模式后，交换机找不到队列会返回错误。交换机有四种类型：Direct, topic, Headers and Fanout
+
+    Direct：direct 类型的行为是”先匹配, 再投送”. 即在绑定时设定一个 routing_key, 消息的routing_key 匹配时, 才会被交换器投送到绑定的队列中去.
+    Topic：按规则转发消息（最灵活）
+    Headers：设置 header attribute 参数类型的交换机
+    Fanout：转发消息到所有绑定队列
+

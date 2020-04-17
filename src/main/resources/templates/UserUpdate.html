@@ -10,46 +10,86 @@
 </head>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
-    layui.use('element', function(){
+    layui.use('element', function () {
         var element = layui.element;
     });
 
 
 </script>
 <script th:inline="javascript">
-    var ok =[[${usershow.userName}]];
-    $(function() {
-        $('#name').val(ok);
-    })
+    // var username = [[${usershow.userName}]];//获取名字
+    // var telphone = [[${usershow.userPhone}]];
+    // var email = [[${usershow.userEmail}]];
+    // $(function () {
+    //     $('#name').val(username);
+    //     $('#email').val(email);
+    //     $('#telphone').val(telphone);
+    // })
 
 </script>
-<script>
-layui.use('form', function(){
-var form = layui.form;
-//监听提交
-
-form.on('submit(formDemo)', function(data){
-layer.msg(JSON.stringify(data.field));
-return false;
-});
-});
+<script th:inline="javascript">
+    layui.use('form', function () {
+        var form = layui.form;
+        form.val('example', {
+            "userId": [[${usershow.userId}]]
+            ,"userPhone": [[${usershow.userPhone}]]
+            ,"userName":[[${usershow.userName}]]
+            ,"userEmail": [[${usershow.userEmail}]]
+        });
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field),{title:'最终的提交信息'});
+            $.ajax({
+                type: 'post'
+                ,url:'/updateUser'
+                , contentType: 'application/json;charset=utf-8'
+                , async: true
+                ,datatype: "json"
+               , data:JSON.stringify(data.field)
+                ,success:function(obj){
+                    layui.msg("layui调用ajax成功");
+                },error:function () {
+                    alert("与数据库交互失败")
+                }
+                })
+        });
+        layui.$('#LAY-component-form-setval').on('click', function(){
+            form.val('example', {
+                "userId": [[${usershow.userId}]]
+                ,"userPhone": [[${usershow.userPhone}]]
+                ,"userName":[[${usershow.userName}]]
+                ,"userEmail": [[${usershow.userEmail}]]
+            });
+        });
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+    });
 </script>
 <script>
-layui.use('upload', function(){
-var upload = layui.upload;
+    layui.use('upload', function () {
+        var upload = layui.upload;
 
 //执行实例
-var uploadInst = upload.render({
-elem: '#test1' //绑定元素
-,url: '/upload/' //上传接口
-,done: function(res){
-//上传完毕回调
-}
-,error: function(){
+        var uploadInst = upload.render({
+            elem: '#test1' //绑定元素
+            , url: '/upload' //上传接口
+            , data: {id: $('#name').val()}//将ID发送过去
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#user_profile').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                alert(res.msg);
+            }
+
+            , error: function () {
 //请求异常回调
-}
-});
-});
+            }
+        });
+    });
 </script>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -60,24 +100,56 @@ elem: '#test1' //绑定元素
         <div style="padding: 15px;">
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
                 <legend>修改个人资料</legend>
+
             </fieldset>
             <div style="text-align: center">
-                <div><a href="#"> <img width="150" height="150" th:src="@{'/img/'+${usershow.getUserImgsrc()}}"/></a></div>
+                <div><a href="#"> <img id="user_profile" width="150" height="150"
+                                       th:src="@{'/img/'+${usershow.getUserImgsrc()}}"/></a></div>
                 <button type="button" class="layui-btn" id="test1">
                     <i class="layui-icon">&#xe67c;</i>点击更改头像
                 </button>
             </div>
 
-            <form class="layui-form" action="">
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="font-size: 20px">昵称：</label>
-                <div class="layui-input-block">
-                    <input id="name" type="text" name="title" required  lay-verify="required"  autocomplete="off" class="layui-input">
+            <form class="layui-form" lay-filter="example">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="font-size: 20px">id：</label>
+                    <div class="layui-input-block">
+                        <input  type="text" name="userId" required lay-verify="required" autocomplete="off"
+                                class="layui-input"/>
+                    </div>
                 </div>
-            </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="font-size: 20px">昵称：</label>
+                    <div class="layui-input-block">
+                        <input  type="text" name="userName" required lay-verify="required" autocomplete="off"
+                               class="layui-input"/>
+                    </div>
+                </div>
 
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="font-size: 20px">电话号码：</label>
+                    <div class="layui-input-block">
+                        <input  type="text" name="userPhone" required lay-verify="required" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="font-size: 20px">电子邮箱：</label>
+                    <div class="layui-input-block">
+                        <input  type="text" name="userEmail" required lay-verify="required" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">赋值</button>
+                        <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">取值</button>
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
             </form>
-            <div id="demo0"></div>
+
         </div>
     </div>
 

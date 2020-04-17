@@ -15,16 +15,16 @@ import java.util.List;
 @Repository
 public interface MovieMapper {
     @Select("select * from movie")
-    List<Movie>  getAllMovie();
+    List<Movie> getAllMovie();
 
     @Select("select * from movie where movie_id=#{id}")
     Movie getMovieByid(int id);
 
-    @Update( "update movie  set movie_site = #{site} where movie_id = #{id}")
-    void  updateMovieSite(String site,int id);
+    @Update("update movie  set movie_site = #{site} where movie_id = #{id}")
+    void updateMovieSite(String site, int id);
 
     @Select("select * from movie where movie_kind =#{MovieKind};")
     List<Movie> getAllMovieByMovieKind(String MovieKind);
 
 
-}
+    }

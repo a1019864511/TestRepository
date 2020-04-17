@@ -25,6 +25,7 @@ public class UserController {
     UserMapper usermaaper;
     @Autowired
     discussMapper discussMapper;
+
     //首页
     @RequestMapping("/index")
     public String index() {
@@ -49,67 +50,78 @@ public class UserController {
     public ReturnData resist(@RequestBody User user) {
         ReturnData data = new ReturnData();
         try {
-            usermaaper.insertUser(user);
-            data.setCode("0");//0代表插入成功
-            data.setMessage("注册成功");
+            usermaaper.insertUser( user );
+            data.setCode( "0" );//0代表插入成功
+            data.setMessage( "注册成功" );
             return data;
         } catch (Exception e) {
-            if (usermaaper.getUserByid(user.getUserId()) != null) {
-                data.setCode("1");//2代表当前用户已经存在
-                data.setMessage("该用户名已经存在,请重新输入");
+            if (usermaaper.getUserByid( user.getUserId() ) != null) {
+                data.setCode( "1" );//2代表当前用户已经存在
+                data.setMessage( "该用户名已经存在,请重新输入" );
                 return data;
-            };
+            }
+            ;
 
             String message = e.toString();
-            if (message.contains("user_email") || message.contains("user_phone")) {
+            if (message.contains( "user_email" ) || message.contains( "user_phone" )) {
                 message = "你的邮箱或者电话号码已经存在,";
             }
-            data.setCode("2");
-            data.setMessage(message);
+            data.setCode( "2" );
+            data.setMessage( message );
             return data;
         }
 
     }
-
 
 
     @ResponseBody
     @PostMapping("/login")
     public ReturnData login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) {
         ReturnData data = new ReturnData();
-        User checkUser = usermaaper.getUserByid(username);
+        User checkUser = usermaaper.getUserByid( username );
         if (checkUser == null) {
-            data.setMessage("你的账户名不存在，请重新检查您的账户名");
-            data.setCode("0");
+            data.setMessage( "你的账户名不存在，请重新检查您的账户名" );
+            data.setCode( "0" );
             return data;
         }
-        if (checkUser.getUserPwd().equals(password)) {
-            session.setAttribute("name", "login");
-            session.setAttribute("user", checkUser.getUserName());
-            session.setAttribute("userbyid", checkUser.getUserId());
-            data.setMessage("成功登陆");
-            data.setCode("1");
+        if (checkUser.getUserPwd().equals( password )) {
+            session.setAttribute( "name", "login" );
+            session.setAttribute( "user", checkUser.getUserName() );
+            session.setAttribute( "userbyid", checkUser.getUserId() );
+            data.setMessage( "成功登陆" );
+            data.setCode( "1" );
             return data;
         }
-        data.setMessage("密码错误");
-        data.setCode("2");
+        data.setMessage( "密码错误" );
+        data.setCode( "2" );
         return data;
     }
 
     @RequestMapping("/updateUser/{UserID}")
-    public String updateUser(@PathVariable("UserID") String id,Model model){
-        System.out.println("ID为"+id);
-        User user=usermaaper.getUserByid(id);
-        System.out.println(user.toString());
-        model.addAttribute( "usershow",user);
+    public String updateUser(@PathVariable("UserID") String id, Model model) {
+        System.out.println( "ID为" + id );
+        User user = usermaaper.getUserByid( id );
+        System.out.println( user.toString() );
+        model.addAttribute( "usershow", user );
         return "UserUpdate";
     }
+
+    /**
+     * 个人用户信息修改页面api
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updateUser")
+    public String updateUserbyid(@RequestBody User user){
+        System.out.println("updateUser数据为"+user.toString());
+        return "";
+    }
     @RequestMapping("/UserUpdateImg/{UserID}")
-    public String updateUserImg(@PathVariable("UserID") String id,Model model){
-        System.out.println("ID为"+id);
-        User user=usermaaper.getUserByid(id);
-        System.out.println(user.toString());
-        model.addAttribute( "usershow",user);
+    public String updateUserImg(@PathVariable("UserID") String id, Model model) {
+        System.out.println( "ID为" + id );
+        User user = usermaaper.getUserByid( id );
+        System.out.println( user.toString() );
+        model.addAttribute( "usershow", user );
         return "UserUpdate";
     }
 }

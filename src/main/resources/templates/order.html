@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <title>威威影院管理系统</title>
-    <style type ="text/css">
-        .layui-table-cell{
-            height:auto !important;
+    <style type="text/css">
+        .layui-table-cell {
+            height: auto !important;
             width: auto;
         }
     </style>
@@ -15,20 +15,20 @@
     <script src="/webjars/layui/2.5.6/layui.js"></script>
     <script th:inline="javascript">
         //注意：导航 依赖 element 模块，否则无法进行功能性操作
-        layui.use('element', function(){
+        layui.use('element', function () {
             var element = layui.element;
         });
-        layui.use('table', function() {
+        layui.use('table', function () {
             var table = layui.table;
             table.on('tool(demo)', function (obj) {
                 var data = obj.data;
                 if (obj.event === 'pay') {
-                    if(data.orderStatus == 1){
+                    if (data.orderStatus == 1) {
                         layer.msg("这条订单已经付款")
-                    }else{
+                    } else {
                         layer.open({
-                            type:1,
-                            content:'<img width=225 height=305  src="img/weixinpay.jpg"/>'
+                            type: 1,
+                            content: '<img width=225 height=305  src="img/weixinpay.jpg"/>'
                         })
                         $.ajax({
                             type: 'post',
@@ -63,23 +63,23 @@
                     // })
 
                 } else if (obj.event === 'refund') {
-                        layer.confirm('真的要确定退款吗', function (index) {
+                    layer.confirm('真的要确定退款吗', function (index) {
                         layer.msg('ID：' + data.orderId + ' 的查看操作');
-                            $.ajax({
-                                type: 'post',
-                                url: '/Exitorder',
-                                async: true,
-                                datatype: "json",
-                                data: {"orderID": data.orderId},
-                                success: function (obj) {
+                        $.ajax({
+                            type: 'post',
+                            url: '/Exitorder',
+                            async: true,
+                            datatype: "json",
+                            data: {"orderID": data.orderId},
+                            success: function (obj) {
 
-                                },
-                                error: function (obj) {
-                                    alert("交互失败")
-                                }
-                            })
-                            obj.del();
-                            layer.close(index);
+                            },
+                            error: function (obj) {
+                                alert("交互失败")
+                            }
+                        })
+                        obj.del();
+                        layer.close(index);
                     });
                 } else if (obj.event === 'del') {
                     layer.confirm('真的确定要删除这个订单吗', function (index) {
@@ -89,7 +89,7 @@
                             url: '/delorder',
                             async: true,
                             datatype: "json",
-                            data: {"orderID": data.orderId,"movieID":data.movieId},
+                            data: {"orderID": data.orderId, "movieID": data.movieId},
                             success: function (obj) {
                                 layer.msg('订单号：' + data.orderId + '已经成功删除');
                             },
@@ -114,7 +114,7 @@
     <div class="layui-side layui-bg-black" th:include="vidon::copyrighttwo"></div>
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div >
+        <div>
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
                 <legend>历史订单</legend>
             </fieldset>
@@ -139,7 +139,7 @@
             </thead>
         </table>
         <script type="text/html" id="imgsrc">
-            <img  src="/img/{{d.orderImgsrc}}"/>
+            <img src="/img/{{d.orderImgsrc}}"/>
         </script>
         <script type="text/html" id="movieTime">
             <div>{{layui.util.toDateString(d.orderCreateTime, 'yyyy-MM-dd HH:mm:ss')}}</div>
@@ -148,7 +148,7 @@
             {{#  if(d.orderStatus === 0){ }}
             <span style="color: #F581B1;">未付款</span>
             {{#  } else { }}
-                付款
+            付款
             {{#  } }}
         </script>
 

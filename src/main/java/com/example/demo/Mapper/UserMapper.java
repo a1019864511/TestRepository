@@ -3,6 +3,7 @@ package com.example.demo.Mapper;
 import com.example.demo.Entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,5 +24,8 @@ public interface UserMapper {
 
     @Select("select * from user where user_id = #{id}")
     User getUserByid(String id);
+
+    @Update("update user set user_imgsrc =#{fileName} where user_id =#{userId}")
+    void updateImgSrc(String fileName, String userId);
 
 }

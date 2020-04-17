@@ -15,7 +15,7 @@ public class LoginHandler implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-        if (session.getAttribute("name") == null) {
+        if (session.getAttribute( "name" ) == null) {
             return false;
         }
         return true;

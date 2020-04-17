@@ -36,6 +36,7 @@ public class Table {
     public void setCount(int count) {
         this.count = count;
     }
+
     //返回给前端页面的表单数据
     public List<Order> getData() {
         return data;

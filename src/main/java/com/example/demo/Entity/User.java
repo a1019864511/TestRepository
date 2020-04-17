@@ -45,10 +45,12 @@ public class User {
         this.userPhone = userPhone;
         this.userGender = userGender;
     }
+
     //基础构造方法
     public User() {
 
     }
+
     //得到作者的id
     public String getUserId() {
         return userId;
@@ -78,6 +80,7 @@ public class User {
     public String getUserName() {
         return userName;
     }
+
     //设置用户名字
     public void setUserName(String userName) {
         this.userName = userName;

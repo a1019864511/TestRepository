@@ -16,6 +16,6 @@ class DemoApplicationTests {
 
     @Test
     void contextLoads() {
-       movieMapper.updateMovieSite("123",1);
+        movieMapper.updateMovieSite( "123", 1 );
     }
 }
