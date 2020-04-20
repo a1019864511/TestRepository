@@ -63,9 +63,6 @@ public class MovieController {
         return "vidon";
     }
 
-    /**
-     * 根据电影id进入座位选坐页面
-     */
 
 
     @RequestMapping("/shop/{id}")
