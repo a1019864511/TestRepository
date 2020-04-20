@@ -26,5 +26,6 @@ public interface MovieMapper {
     @Select("select * from movie where movie_kind =#{MovieKind};")
     List<Movie> getAllMovieByMovieKind(String MovieKind);
 
-
+    @Select("select * from movie where  movie_name like #{movieName}")
+    List<Movie> getAllMovieByMovieName(String movieName);
     }

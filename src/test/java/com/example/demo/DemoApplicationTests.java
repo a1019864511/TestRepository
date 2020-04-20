@@ -16,6 +16,8 @@ class DemoApplicationTests {
 
     @Test
     void contextLoads() {
-        movieMapper.updateMovieSite( "123", 1 );
+        System.out.println(movieMapper.getAllMovieByMovieName("%死%").size());
+
+
     }
 }

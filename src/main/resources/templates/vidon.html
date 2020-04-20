@@ -6,7 +6,10 @@
     <script src="/webjars/jquery/3.4.1/jquery.js"></script>
     <script>
         $(function () {
-
+            $('#select').click(function () {
+               var href= '/obscureGetMovie/?movieName='+$('#selecttest').val();
+            window.location.href=href;
+            })
         })
     </script>
     <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css">
@@ -18,6 +21,8 @@
             var element = layui.element;
 
         });
+
+
     </script>
 </head>
 <body class="layui-layout-body">
@@ -37,6 +42,7 @@
                     <dd><a href="">授权管理</a></dd>
                 </dl>
             </li>
+            <li class="layui-nav-item" style="margin-left: 50px" >搜索电影: <input id="selecttest" name="select"/><button id='select' class="layui-btn" style="height: 20px;text-align: center;line-height: normal">提交</button></li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
@@ -81,6 +87,8 @@
                 <li class="layui-nav-item"><a href="">发布商品</a></li>
             </ul>
         </div>
+
+
     </div>
 
     <div class="layui-body">
@@ -97,6 +105,7 @@
 
         <div class="layui-container">
             <div class="layui-row layui-col-space20 layui-col-md-offset3" id="laycontent">
+                <div th:if="${List.size()}!=0">
                 <div class="layui-col-md4" th:each="movie:${List}">
                     <div class="layui-col-md8"><img th:src="@{'/img/'+${movie.getMovieImgsrc()}}"/></div>
                     <div class="layui-col-md4">
@@ -108,6 +117,8 @@
                         <div><a th:href="@{'/shop/'+${movie.movieId}}" class="layui-btn layui-btn-normal">选购影片</a></div>
                     </div>
                 </div>
+                </div>
+                <div th:if="${List.size()}==0">查询不到内容</div>
             </div>
 
 

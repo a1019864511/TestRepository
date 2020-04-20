@@ -128,6 +128,19 @@ public class MovieController {
         Movie movie = moviemapper.getMovieByid( movieId );
         return movie.getMovieSite();
 
+        /**
+         * 模糊查询得到当前电影的方法
+         * @return
+         */
+
+    }
+
+    @RequestMapping("obscureGetMovie")
+    private String  obscureGetMovie(@RequestParam("movieName") String movieName,
+                                    Model model){
+        System.out.println("---------------------------");
+        model.addAttribute("List",moviemapper.getAllMovieByMovieName("%"+movieName+"%"));
+        return "vidon";
     }
 
     /**
@@ -140,6 +153,7 @@ public class MovieController {
         java.sql.Timestamp dateTime = new java.sql.Timestamp( now.getTime() );
         return dateTime;
     }
+
 
     /**
      * 得到订单编号的方法
