@@ -1,3 +1,18 @@
+    2020/04/21
+    //自定义错误页面：通过实现ErrorPageRegistrar接口自定义错误页面
+    //自定义拦截页面：通过实现HandlerInterceptor接口实现拦截
+    //在使用 layui-col-md进行布局排版的时候,必须保证使用该类的div里面有文本,否则会出现布局失败的情况
+    //已知webServices报文，可以运用Idea自带的工具生成客户端代码，里面会生成一个接口,接口的实例化通过server.getService()方法实现
+    返回的XML报文通过dom4j解析
+    //SAXReader读取XMl对象,返回Document格式的对象，得到Document对象以后，使用getRootElement()方法获取根元素，
+    然后根据相应的业务逻辑进行处理
+    //github commit代码以后还要记得push
+    //layui运用侧边导航栏时候内容主题区域一定要记得加上 lay-body
+
+
+
+
+    2020/4/17
      //代码重构的时候如果超过5个入参就尽量不要重构
 	//禁止在循环里面新建对象
 

@@ -102,9 +102,9 @@ public class MovieController {
         int movieId = Integer.parseInt( id );
         try {
             //把String对象转换成int对象
-            int userID = Integer.parseInt( userId );
-            //往middle表里面插入一条记录
-            middleMapper.insertSiteByMovieIdUserid( movieId, userID, movieSite );
+            int userID = Integer.parseInt(userId);
+//            //往middle表里面插入一条记录
+//            middleMapper.insertSiteByMovieIdUserid( movieId, userID, movieSite );
             //得到movie表里面的座位信息
             Movie movie = moviemapper.getMovieByid( movieId );
             //更新最新得到的座位信息
