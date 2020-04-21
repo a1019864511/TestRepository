@@ -6,24 +6,13 @@
     返回的XML报文通过dom4j解析
     //SAXReader读取XMl对象,返回Document格式的对象，得到Document对象以后，使用getRootElement()方法获取根元素，
     然后根据相应的业务逻辑进行处理
+    //github commit代码以后还要记得push
+    //layui运用侧边导航栏时候内容主题区域一定要记得加上 lay-body
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    2020/4/17
      //代码重构的时候如果超过5个入参就尽量不要重构
 	//禁止在循环里面新建对象
 
