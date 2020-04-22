@@ -41,7 +41,8 @@ public class Uploadimp {
         String suffixName = name.substring( name.lastIndexOf( "." ) );//截取当前文件名字的后缀
         String hash = Integer.toHexString( new Random().nextInt() );//生成随机文件名
         String fileName = hash + suffixName;//文件名字
-        String pathtwo = "C:\\Users\\xin.liu\\Desktop\\demo\\src\\main\\resources\\static\\img" + "\\";
+//        String pathtwo = "C:\\Users\\xin.liu\\Desktop\\demo\\src\\main\\resources\\static\\img" + "\\";
+        String pathtwo = "D:\\TestRepository\\src\\main\\resources\\static\\img"+"\\";
         File tempFile = new File( pathtwo + fileName );//新建文件名字
         file.transferTo( tempFile );//写入文件到指定的路径
         userMapper.updateImgSrc( fileName, userId );

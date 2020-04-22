@@ -24,4 +24,8 @@ public class AdminController {
         return "/Admin/AdminShow";
     }
 
+        @RequestMapping("/adminAddMovie")
+    public String getAdminAddMovie(){
+        return "/Admin/AdminAddmovie";
+    }
 }
