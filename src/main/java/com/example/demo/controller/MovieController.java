@@ -50,9 +50,7 @@ public class MovieController {
     @RequestMapping(value = {"/vidon/{MovieKind}", "/vidon"})
     public String vidon(@PathVariable(value = "MovieKind", required = false) String moviekind, Model model) {
         System.out.println( "moviekind：" + moviekind );
-        //判断电影种类moviekind是否为空
-        //如果为空则代表当前是所有电影页面
-        //如果加上种类就是电影分类页面
+
         if (moviekind == null || moviekind.length() == 0) {
             model.addAttribute( "List", moviemapper.getAllMovie() );
             System.out.println( "进入这个方法了" );

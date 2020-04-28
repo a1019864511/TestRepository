@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.Entity.Discuss;
 import com.example.demo.utils.ClassUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -30,6 +31,7 @@ public class Testmain {
         //关闭通道和连接
         channel.close();
         connection.close();
+        Discuss discuss =new Discuss();
 
     }
 }
