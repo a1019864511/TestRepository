@@ -12,8 +12,10 @@ import java.util.List;
  * @Verion 1.0
  * @TIME 2020/3/23
  */
+@SuppressWarnings({"ALL", "AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc"})
 @Repository
 public interface MovieMapper {
+    @SuppressWarnings("AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc")
     @Select("select * from movie")
     List<Movie> getAllMovie();
 

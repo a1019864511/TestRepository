@@ -8,7 +8,12 @@ import org.springframework.stereotype.Repository;
  * @Verion: 1.0
  * @TIME:Created in 9:10 2020/4/21
  */
+@SuppressWarnings("ALL")
 @Repository
 public interface adminMapper {
+
+    public static void main(String[] args) {
+
+    }
 
 }
