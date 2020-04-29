@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.Mapper.UserMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,13 @@ import java.util.Random;
  * @Verion 1.0
  * @TIME 2020/4/14
  */
+@Api(tags = "Uploadimp",description = "文件上传文件接口")
 @Controller
 public class Uploadimp {
     @Autowired
     UserMapper userMapper;
 
+    @ApiOperation(value ="上传所有文件到pathtwo路径中")
     @ResponseBody
     @RequestMapping("/upload")
     public String uploadImp(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {

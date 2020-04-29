@@ -1,7 +1,7 @@
 package com.example.demo.Entity;
 
 
-public class Discuss {
+public class Discuss implements Cloneable{
 
     private long userId;
     private long movieId;
@@ -25,6 +25,15 @@ public class Discuss {
         this.discussTime = discussTime;
     }
 
+    public Object clone(){
+        Discuss clone = null;
+        try {
+            clone= (Discuss) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
+    }
     @Override
     public String toString() {
         return "Discuss{" +

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Verion: 1.0
  * @TIME:Created in 8:13 2020/4/21
  */
+
 @Controller
 @RequestMapping("/error")
 public class ErrorController {
