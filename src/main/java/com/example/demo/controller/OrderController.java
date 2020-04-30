@@ -4,6 +4,7 @@ import com.example.demo.Entity.Movie;
 import com.example.demo.Entity.Order;
 import com.example.demo.Entity.Table;
 import com.example.demo.Mapper.MovieMapper;
+import org.apache.poi.hssf.record.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +40,7 @@ public class OrderController {
         List<Order> orderLis = orderMapper.getOrderList( id );
         //循环获取根据电影id获取电影名字
         for (Order order : orderLis) {
-            Movie movie = movieMapper.getMovieByid( (int) order.getMovieId() );
+            Movie movie = movieMapper.getMovieByid((int) order.getMovieId() );
             String name = movie.getMovieName();
             String Imgsrc = movie.getMovieImgsrc();
             order.setMovieName( name );
@@ -49,7 +50,7 @@ public class OrderController {
         Table table = new Table();
         table.setCode( 0 );
         table.setCount( orderLis.size() );
-        table.setData( orderLis );
+        table.setData(orderLis );
         System.out.println( table.toString() );
         return table;
     }

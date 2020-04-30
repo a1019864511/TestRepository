@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+
+
 import java.util.List;
 
 /**
@@ -7,11 +9,19 @@ import java.util.List;
  * @Verion 1.0
  * @TIME 2020/3/28
  */
-public class Table {
+public class Table<T> {
     private int code;
     private String msg;
     private int count;
-    private List<Order> data;
+    private List<T> data;
+
+    public List<T> getData() {
+        return data;
+    }
+
+    public void setData(List<T> data) {
+        this.data = data;
+    }
 
     public int getCode() {
         return code;
@@ -38,13 +48,7 @@ public class Table {
     }
 
     //返回给前端页面的表单数据
-    public List<Order> getData() {
-        return data;
-    }
 
-    public void setData(List<Order> data) {
-        this.data = data;
-    }
 
     @Override
     public String toString() {
@@ -55,4 +59,6 @@ public class Table {
                 ", data=" + data +
                 '}';
     }
+
+
 }

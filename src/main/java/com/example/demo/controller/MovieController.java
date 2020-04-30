@@ -7,6 +7,7 @@ import com.example.demo.Mapper.MovieMapper;
 import com.example.demo.Mapper.middleMapper;
 import com.example.demo.Mapper.orderMapper;
 import com.example.demo.Mapper.discussMapper;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,7 @@ import java.util.List;
  * @Verion 1.0
  * @TIME 2020/3/26
  */
-@Controller
+@RestController
 public class MovieController {
     @Autowired
     MovieMapper moviemapper;
@@ -141,6 +142,16 @@ public class MovieController {
         return "vidon";
     }
 
+    @ApiOperation("增加电影通过管理员的方法")
+    @PostMapping("/addMovieByAdmin")
+    public String addMovieByAdmin(@RequestBody Movie movie){
+        movie.setMovieId(Integer.parseInt(getSerialNumber().substring(7,11)));
+        System.out.println(movie.toString());
+        if(!moviemapper.addMovieByAdmin(movie)){
+            return "插入成功";
+        }
+        return "插入成功";
+    }
     /**
      * 得到当前时间戳的方法
      *
@@ -161,8 +172,9 @@ public class MovieController {
     private String getSerialNumber() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat( "yyMMddHHmmss" );
-        String Number = formatter.format( calendar.getTime() );
-        return Number;
+        return formatter.format( calendar.getTime() );
+
+
     }
 
 

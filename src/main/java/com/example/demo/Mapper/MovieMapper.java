@@ -1,6 +1,7 @@
 package com.example.demo.Mapper;
 
 import com.example.demo.Entity.Movie;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
@@ -30,4 +31,8 @@ public interface MovieMapper {
 
     @Select("select * from movie where  movie_name like #{movieName}")
     List<Movie> getAllMovieByMovieName(String movieName);
+
+
+    @Insert("INSERT INTO `movie` VALUES (#{movieName}, #{movieId}, #{movieActor}, #{movieIntroduce}, #{movieDirect}, #{siteId}, #{movieArea}, #{movieTime}, #{movieImgsrc}, #{movieSite},#{moviePrice}, #{movieKind})")
+    boolean addMovieByAdmin(Movie movie);
     }
