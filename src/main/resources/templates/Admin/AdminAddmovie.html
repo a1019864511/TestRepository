@@ -35,7 +35,6 @@
             )
             form.on('submit(formDemo)', function(data){
                 alert(JSON.stringify(data.field))
-
                 $.ajax({
                     type: 'post'
                     ,url:'/addMovieByAdmin'
@@ -44,7 +43,11 @@
                     ,datatype: "json"
                     , data:JSON.stringify(data.field)
                     ,success:function(obj){
-                        alert("恭喜你,增加电影成功")
+                       if(obj.status == 1){
+                           alert("进入状态码为0的时候");
+                           alert(obj.data);
+                       }
+
                     },error:function () {
                         alert("与数据库交互失败")
                     }

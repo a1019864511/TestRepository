@@ -7,6 +7,7 @@ import com.example.demo.Mapper.MovieMapper;
 import com.example.demo.Mapper.middleMapper;
 import com.example.demo.Mapper.orderMapper;
 import com.example.demo.Mapper.discussMapper;
+import com.example.demo.common.CommonReturnType;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -142,17 +143,27 @@ public class MovieController {
         return "vidon";
     }
 
-    @ApiOperation("增加电影通过管理员的方法")
+    @ApiOperation("增加管理员增加电影的方法")
     @PostMapping("/addMovieByAdmin")
-    public String addMovieByAdmin(@RequestBody Movie movie){
-        movie.setMovieId(Integer.parseInt(getSerialNumber().substring(7,11)));
+    @ResponseBody
+    public CommonReturnType addMovieByAdmin(@RequestBody Movie movie){
+        CommonReturnType commonReturnType = new CommonReturnType();
+        double d = Math.random();
+        String.valueOf(d).substring(3,14);
+        movie.setMovieId(Integer.parseInt(String.valueOf(d).substring(3,11)));
         System.out.println(movie.toString());
-        if(!moviemapper.addMovieByAdmin(movie)){
-            return "插入成功";
+        if(!moviemapper.addMovieByAdmin(movie)) {
+            commonReturnType.setStatus(0);
+            commonReturnType.setData("恭喜你,数据插入失败");
+            return commonReturnType;
         }
-        return "插入成功";
+        commonReturnType.setStatus(1);
+        commonReturnType.setData("恭喜您,成功插入电影数据");
+        return commonReturnType;
     }
+
     /**
+     *
      * 得到当前时间戳的方法
      *
      * @return

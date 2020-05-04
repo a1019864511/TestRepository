@@ -20,7 +20,8 @@
                 ,page: true //开启分页
                 ,cols: [
                     [ //表头
-                    {field: 'movieId', title: '电影id', width:80, sort: true, fixed: 'left'}
+                        {type:'checkbox', fixed: 'left'}
+                    ,{field: 'movieId', title: '电影id', width:80, sort: true, fixed: 'left'}
                     ,{field: 'movieName', title: '名字', width:80}
                     ,{field: 'movieActor', title: '演员', width:80, sort: true}
                     ,{field: 'movieDirect', title: '导演', width:80}
@@ -50,7 +51,7 @@
                     "data": result //解析数据列表
                 };
 
-
+        //public static void main
             }
 
             });
@@ -68,6 +69,7 @@
                          layer.msg('编辑');
                          break;
                  };
+               
              });
 
              table.on('row(test)', function(obj){

@@ -3,8 +3,8 @@ package com.example.demo.utils;
 import com.example.demo.Services.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author xing.liu
@@ -21,14 +21,7 @@ public class Testmain {
      * @Date
      */
     public static void main(String[] args) {
-        Timer timer  = new Timer();
-        TimerTask tt = new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("正在执行");
-            }
-        };
-        timer.schedule(tt,2000);
-        System.out.println("输出对");
+        double d = Math.random();
+        String.valueOf(d).substring(3,14);
     }
 }
