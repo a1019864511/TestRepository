@@ -10,27 +10,27 @@
          layui.use('table', function(){
             var table = layui.table;
             //第一个实例
-
             table.render({
                 elem: '#demo'
                 ,toolbar:'#toolbarDemo'
                 ,title:'已存在电影分析'
-                ,height: 400
+                ,height: 550
                 ,url: '/adminOperaMovie' //数据接口
                 ,page: true //开启分页
                 ,cols: [
                     [ //表头
                         {type:'checkbox', fixed: 'left'}
-                    ,{field: 'movieId', title: '电影id', width:80, sort: true, fixed: 'left'}
-                    ,{field: 'movieName', title: '名字', width:80}
-                    ,{field: 'movieActor', title: '演员', width:80, sort: true}
-                    ,{field: 'movieDirect', title: '导演', width:80}
-                    ,{field: 'movieArea', title: '区域', width: 177}
-                    ,{field: 'movieSite', title: '座位', width: 80, sort: true}
-                    ,{field: 'moviePrice', title: '价格', width: 80, sort: true}
-                    ,{field: 'movieKind', title: '种类', width: 80}
-                    ,{field: 'movieTime', title: '播放时间', width: 135, sort: true}
-                        ,{title:'相关操作',toolbar:'#barDemo'}
+                        ,{field: 'movieId', title: '电影id',  sort: true,}
+                        ,{field:'movieImgsrc',title:'电影图片',templet:'#imgsrc'}
+                    ,{field: 'movieName', title: '名字', edit: 'text'}
+                    ,{field: 'movieActor', title: '演员',  sort: true,edit: 'text'}
+                    ,{field: 'movieDirect', title: '导演', edit: 'text'}
+                    ,{field: 'movieArea', title: '区域', edit: 'text'}
+                    ,{field: 'movieSite', title: '座位', edit: 'text'}
+                    ,{field: 'moviePrice', title: '价格', sort: true,edit: 'text'}
+                    ,{field: 'movieKind', title: '种类', }
+                    ,{field: 'movieTime', title: '播放时间',  sort: true}
+                        ,{title:'相关操作',toolbar:'#barDemo',width:200}
                 ]
                 ]
                 //不加此方法可能无法解析成功
@@ -51,34 +51,42 @@
                     "data": result //解析数据列表
                 };
 
-        //public static void main
+
             }
 
             });
 
-             table.on('toolbar(test)', function(obj){
-                 var checkStatus = table.checkStatus(obj.config.id);
-                 switch(obj.event){
-                     case 'add':
-                         layer.msg('添加');
-                         break;
-                     case 'delete':
-                         layer.msg('删除');
-                         break;
-                     case 'update':
-                         layer.msg('编辑');
-                         break;
-                 };
-               
-             });
+                table.on('tool(test)', function(obj){
+                 var data = obj.data; //获得当前行数据
+                 var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+                 var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+                 if(layEvent === 'detail'){ //查看
+                     alert(JSON.stringify(data));
+                 } else if(layEvent === 'del'){ //修改電影信息
 
-             table.on('row(test)', function(obj){
+                     layer.confirm('真的提交这部电影吗', function(index){
+                         $.ajax({
+                             type: 'post',
+                             url: '/updateMovieByAdmin',
+                             contentType: 'application/json;charset=utf-8',
+                             async: true,
+                             datatype: "json",
+                             data: JSON.stringify(data),
+                             success: function (obj) {
+                                 layer.msg('电影id：' + data.movieId + '已经成功更新');
+                             },
+                             error: function (obj) {
+                                 layer.msg('订单号：' + data.orderId + '删除失败');
+                             }
+                         })
 
+                         //向服务端发送删除指令
+                     });
+                 } else if(layEvent === 'edit') { //编辑
+                     //do something
+                     //同步更新缓存对应的值
 
-                 console.log(obj.tr) //得到当前行元素对象
-                 console.log(obj.data) //得到当前行数据
-                 //obj.del(); //删除当前行
-                 //obj.update(fields) //修改当前行数据
+                 }
              });
 
         });
@@ -94,25 +102,27 @@
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">信息提交</a>
+    </script>
+
+    <script type="text/html" id="imgsrc">
+        <img height="200" src="/img/{{d.movieImgsrc}}"/>
     </script>
 </head>
+
 <body >
 
 <div class="layui-side layui-bg-black " th:fragment="adminTwo">
     <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+        <ul class="layui-nav layui-nav-tree" lay-filter="testfil">
             <li class="layui-nav-item layui-nav-itemed">
                 <a class="" href="javascript:;">电影管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">显示已有电影</a></dd>
-                    <dd><a href="">报表分析</a></dd>
+                    <dd><a href="/adminshow">显示已有电影</a></dd>
+                    <dd><a href="/Cinemaline">区域分析</a></dd>
                     <dd><a href="">查看管理员</a></dd>
-                    <dd><a href="">添加电影</a></dd>
-                    <dd><a href="">喜剧片</a></dd>
-                    <dd><a href="">战争片</a></dd>
-                    <dd><a href="">恐怖片</a></dd>
+                    <dd><a href="/adminAddMovie">添加电影</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item">

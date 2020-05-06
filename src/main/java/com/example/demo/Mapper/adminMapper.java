@@ -1,6 +1,10 @@
 package com.example.demo.Mapper;
 
+import com.example.demo.Entity.Admin;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @Description:
@@ -8,12 +12,15 @@ import org.springframework.stereotype.Repository;
  * @Verion: 1.0
  * @TIME:Created in 9:10 2020/4/21
  */
-@SuppressWarnings("ALL")
+
 @Repository
 public interface adminMapper {
 
-    public static void main(String[] args) {
+    @Select("select * from Admin where admin_username = #{userName}")
+    Admin idGetAdmin(String userName);
 
-    }
+
+    @Select("select * from Admin")
+    List<Admin> getAllAdmin();
 
 }

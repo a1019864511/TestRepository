@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.example.demo.utils.SendMessageutil.getRandomCode;
+import static com.example.demo.utils.SendMessageutil.send;
+
 /**
  * @author xing.liu
  * @Verion 1.0
@@ -21,7 +24,10 @@ public class Testmain {
      * @Date
      */
     public static void main(String[] args) {
-        double d = Math.random();
-        String.valueOf(d).substring(3,14);
+           send("a1019864511",
+                   "d41d8cd98f00b204e980",
+                   "13189275226",
+                   "");
+
     }
 }

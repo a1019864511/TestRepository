@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.Entity.Admin;
 import com.example.demo.Entity.Movie;
 import com.example.demo.Entity.Table;
 import com.example.demo.Mapper.MovieMapper;
 import com.example.demo.Mapper.UserMapper;
+import com.example.demo.Mapper.adminMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,8 @@ public class Uploadimp {
     UserMapper userMapper;
     @Autowired
     MovieMapper movieMapper;
+    @Autowired
+    adminMapper adminMapper;
 
     @ResponseBody
     @RequestMapping("/upload")
@@ -83,6 +87,18 @@ public class Uploadimp {
         List<Movie> allMovie = movieMapper.getAllMovie();
         table.setData(allMovie);
         table.setCount(allMovie.size());
+        table.setCode(0);
+        return table;
+    }
+
+
+    @ResponseBody
+    @GetMapping("/getAllAdmin")
+    public Table getAllAdmin(){
+        Table table = new Table();
+        List<Admin> allAdmin = adminMapper.getAllAdmin();
+        table.setData(allAdmin);
+        table.setCount(allAdmin.size());
         table.setCode(0);
         return table;
     }

@@ -120,7 +120,7 @@ public class UserController {
     public String updateUserImg(@PathVariable("UserID") String id, Model model) {
         System.out.println( "ID为" + id );
         User user = usermaaper.getUserByid( id );
-        System.out.println( user.toString() );
+
         model.addAttribute( "usershow", user );
         return "UserUpdate";
     }

@@ -10,32 +10,54 @@
         layui.use('layer', function(){
             var layer = layui.layer;
             layer.msg('hello');
-            $("#login").click(function(){
-            var user=$("input[name='user']").val();
-            var password=$("input[name='password']").val();
-            window.location.href=''
-            })
         });
-        $(function(){
+    //当你带着目的去做一件事的时候
+    </script>
+    <script>
+        $(function () {
+            $("#test").click(function(){
+                alert('进来了额')
+                var user=$("input[name='adminUsername']").val();
+                var password=$("input[name='adminPassword']").val();
+                alert(user+password);
+                $.ajax({
+                    type:'post'
+                    ,url:'/AdminLogin'
+                    ,contentType: 'application/json;charset=utf-8'
+                    //如果遇到400错误,记得加一个JSON.stringify()方法
+                    , data: JSON.stringify({"adminUsername":user,"adminPassword":password})
+                    ,success:function(obj){
+                        if(obj.status == 2){
+                            window.location.href='/adminshow';
+                        }
+                        if(obj.status == 1){
+                            alert("密码错误");
+                        }
+                        if(obj.status == 0){
+                            alert("您的管理员并不存在");
+                        }
 
+                    },error:function () {
+                        alert("与数据库交互失败")
+                    }
+                })
+            })
         })
-        //
 
-        //
     </script>
 </head>
 <body>
 <h2 style="text-align: center">欢迎来到威威影院后台管理系统</h2>
-
 <div class="middle layui-row">
 <div class="layui-col-md8">
-    <span>1</span>
 </div>
 
 <div  class="layui-col-md4">
-  <div> <span>用户名</span><input name="user"/></div>
-    <div> <span>密码</span><input name="password"/></div>
-    <button class="layui-btn" id="login">提交</button>
+
+    <div> <span>用户名</span><input name="adminUsername"/></div>
+    <div> <span>密码</span><input name="adminPassword"/></div>
+    <button  id="test">提交</button>
+
 </div>
 </div>
 

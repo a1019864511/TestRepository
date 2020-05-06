@@ -24,7 +24,7 @@ import java.util.List;
  * @Verion 1.0
  * @TIME 2020/3/26
  */
-@RestController
+@Controller
 public class MovieController {
     @Autowired
     MovieMapper moviemapper;
@@ -52,7 +52,6 @@ public class MovieController {
     @RequestMapping(value = {"/vidon/{MovieKind}", "/vidon"})
     public String vidon(@PathVariable(value = "MovieKind", required = false) String moviekind, Model model) {
         System.out.println( "moviekind：" + moviekind );
-
         if (moviekind == null || moviekind.length() == 0) {
             model.addAttribute( "List", moviemapper.getAllMovie() );
             System.out.println( "进入这个方法了" );
@@ -67,6 +66,11 @@ public class MovieController {
 
     @RequestMapping("/shop/{id}")
     public String shop(@PathVariable("id") int id, Model model) {
+        //修复当电影座位为空的时候导致前端有bug无法增加座位的bug
+        Movie movie=moviemapper.getMovieByid( id );
+        if(movie.getMovieSite()==null){
+            movie.setMovieSite("");
+        };
         model.addAttribute( "movie", moviemapper.getMovieByid( id ) );
         model.addAttribute( "discuss", discussMapper.getAllDiscussByMovieId( id ) );
         List<Discuss> lis = discussMapper.getAllDiscussByMovieId( id );
@@ -184,8 +188,6 @@ public class MovieController {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat( "yyMMddHHmmss" );
         return formatter.format( calendar.getTime() );
-
-
     }
 
 

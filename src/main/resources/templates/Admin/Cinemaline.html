@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/webjars/jquery/3.4.1/jquery.js"></script>
+    <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css">
+    <script src="/webjars/layui/2.5.6/layui.js"></script>
+    <script>
+        layui.use('table', function() {
+            var table = layui.table;
+
+        })
+
+
+
+    </script>
+</head>
+<body>
+<div class="layui-side layui-bg-black" th:include="/Admin/AdminShow::adminTwo"></div>
+layui.code
+<div class="layui-container">
+    <div class="layui-row">
+        <div class="layui-col-md4">
+            <div>
+                <h4 style="text-align: center">A101区域分析<button>刷新</button></h4>
+                <table class="layui-table" lay-data="{height:315, url:'/movieAreaView/A101', page:true, id:'test'}" lay-filter="test">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'movieName', width:80, sort: true}">电影名字</th>
+                        <th lay-data="{field:'movieTime', width:80}">电影播出时间</th>
+                        <th lay-data="{field:'purchseTicket', width:80, sort: true}">已购票数</th>
+                        <th lay-data="{field:'movieSite'}">剩余票数</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div >
+                <h4 style="text-align: center">A102区域分析<button>刷新</button></h4>
+                <table class="layui-table" lay-data="{height:315, url:'/movieAreaView/A102', page:true, id:'test'}" lay-filter="test">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'movieName', width:80, sort: true}">电影名字</th>
+                        <th lay-data="{field:'movieTime', width:80}">电影播出时间</th>
+                        <th lay-data="{field:'purchseTicket', width:80, sort: true}">已购票数</th>
+                        <th lay-data="{field:'movieSite'}">剩余票数</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div >
+                <h4 style="text-align: center">A103区域分析<button id="refresh">刷新</button></h4>
+                <table class="layui-table" lay-data="{height:315, url:'/movieAreaView/A103', page:true, id:'test',}" lay-filter="test">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'movieName',  sort: true,width:80}">电影名字</th>
+                        <th lay-data="{field:'movieTime', templet:'#movieTime',width:150}" >电影播出时间</th>
+                        <th lay-data="{field:'purchseTicket', sort: true}">已购票数</th>
+                        <th lay-data="{field:'movieSite'}">剩余票数</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="movieTime">
+        {{# if(new Date(d.movieTime).getTime()> new Date().getTime()){ }}
+        <span>{{d.movieTime}}</span>
+        {{#  } else {}}
+        <span style="color: red">电影已经开始或播放完毕</span>
+        {{#  } }}
+    </script>
+    <div class="layui-row">
+        <div class="layui-col-md4">
+            <div>
+                <h4 style="text-align: center">A104区域分析<button>刷新</button></h4>
+                <table class="layui-table" lay-data="{height:315, url:'/movieAreaView/A104', page:true, id:'test'}" lay-filter="test">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'movieName', width:80, sort: true}">电影名字</th>
+                        <th lay-data="{field:'movieTime', width:80}">电影播出时间</th>
+                        <th lay-data="{field:'purchseTicket', width:80, sort: true}">已购票数</th>
+                        <th lay-data="{field:'movieSite'}">剩余票数</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div >
+                <h4 style="text-align: center">A105区域分析<button>刷新</button></h4>
+                <table class="layui-table" lay-data="{height:315, url:'/movieAreaView/A105', page:true, id:'test'}" lay-filter="test">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'movieName', width:80, sort: true}">电影名字</th>
+                        <th lay-data="{field:'movieTime', width:80}">电影播出时间</th>
+                        <th lay-data="{field:'purchseTicket', width:80, sort: true}">已购票数</th>
+                        <th lay-data="{field:'movieSite'}">剩余票数</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div >
+                <h4 style="text-align: center">A106区域分析<button>刷新</button></h4>
+                <table class="layui-table" lay-data="{height:315, url:'/movieAreaView/A106', page:true, id:'test',}" lay-filter="test">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'movieName',  sort: true,width:80}">电影名字</th>
+                        <th lay-data="{field:'movieTime', templet:'#movieTime',width:150}" >电影播出时间</th>
+                        <th lay-data="{field:'purchseTicket', sort: true}">已购票数</th>
+                        <th lay-data="{field:'movieSite'}">剩余票数</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-col-md4">
+            <div>
+                <h4 style="text-align: center">A107区域分析<button>刷新</button></h4>
+                <table class="layui-table" lay-data="{height:315, url:'/movieAreaView/A107', page:true, id:'test'}" lay-filter="test">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'movieName', width:80, sort: true}">电影名字</th>
+                        <th lay-data="{field:'movieTime', width:80}">电影播出时间</th>
+                        <th lay-data="{field:'purchseTicket', width:80, sort: true}">已购票数</th>
+                        <th lay-data="{field:'movieSite'}">剩余票数</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div >
+                <h4 style="text-align: center">A108区域分析<button>刷新</button></h4>
+                <table class="layui-table" lay-data="{height:315, url:'/movieAreaView/A108', page:true, id:'test'}" lay-filter="test">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'movieName', width:80, sort: true}">电影名字</th>
+                        <th lay-data="{field:'movieTime', width:80}">电影播出时间</th>
+                        <th lay-data="{field:'purchseTicket', width:80, sort: true}">已购票数</th>
+                        <th lay-data="{field:'movieSite'}">剩余票数</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div >
+                <h4 style="text-align: center">A109区域分析<button >刷新</button></h4>
+                <table class="layui-table" lay-data="{height:315, url:'/movieAreaView/A109', page:true, id:'test',}" lay-filter="test">
+                    <thead>
+                    <tr>
+                        <th lay-data="{field:'movieName',  sort: true,width:80}">电影名字</th>
+                        <th lay-data="{field:'movieTime', templet:'#movieTime',width:150}" >电影播出时间</th>
+                        <th lay-data="{field:'purchseTicket', sort: true}">已购票数</th>
+                        <th lay-data="{field:'movieSite'}">剩余票数</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

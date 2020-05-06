@@ -15,7 +15,6 @@
     <div class="container d-flex align-items-center">
         <div class="form-holder has-shadow">
             <div class="row">
-                <!-- Logo & Information Panel-->
                 <div class="col-lg-6">
                     <div class="info d-flex align-items-center">
                         <div class="content">
@@ -26,23 +25,20 @@
                         </div>
                     </div>
                 </div>
-                <!-- Form Panel    -->
-                <div class="col-lg-6 bg-white">
+
+                <div class="col-lg-6 bg-white layui-bg-red">
                     <div class="form d-flex align-items-center">
                         <div class="content">
-
                             <div class="form-group">
                                 <input id="login-username" type="text" name="userName" required data-msg="请输入用户名"
-                                       placeholder="用户名" value="admin" class="input-material">
-                            </div>
-                            <div class="form-group">
+                                       placeholder="用户名" value="admin" class="input-material"/>
+
                                 <input id="login-password" type="password" name="passWord" required data-msg="请输入密码"
-                                       placeholder="密码" class="input-material">
+                                       placeholder="密码" class="input-material"/>
                             </div>
                             <button id="login" type="submit" class="btn btn-primary">登录</button>
                             <div style="margin-top: -40px;">
-                                <!-- <input type="checkbox"  id="check1"/>&nbsp;<span>记住密码</span>
-                                <input type="checkbox" id="check2"/>&nbsp;<span>自动登录</span> -->
+
                                 <div class="custom-control custom-checkbox " style="float: right;">
                                     <input type="checkbox" class="custom-control-input" id="check2">
                                     <label class="custom-control-label" for="check2">自动登录</label>
@@ -65,9 +61,6 @@
 <!-- JavaScript files-->
 <script th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 
-<!--    <script th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>&lt;!&ndash;表单验证&ndash;&gt;-->
-<!-- Main File-->
-<!--    <script th:src="@{/js/front.js}"></script>-->
 <script>
     $(function () {
         $("#login").click(function () {
@@ -90,29 +83,13 @@
                         alert(obj.message);
                     }
                 },
-                error: function (obj) {
+                error: function () {
                     alert("交互失败")
                 }
 
             })
         })
 
-        /*$("#check2").click(function(){
-            var flag=$('#check2').prop('checked');
-            if(flag){
-                var userName=$("#login-username").val();
-                var passWord=$("#login-password").val();
-                $.ajax({
-                    type:"post",
-                    url:"http://localhost:8080/powers/pow/regUsers",
-                    data:{"userName":userName,"passWord":passWord},
-                    async:true,
-                    success:function(res){
-                        alert(res);
-                    }
-                });
-            }
-        })*/
     })
 </script>
 </body>

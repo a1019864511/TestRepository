@@ -27,5 +27,5 @@ public interface UserMapper {
 
     @Update("update user set user_imgsrc =#{fileName} where user_id =#{userId}")
     void updateImgSrc(String fileName, String userId);
-
+  
 }

@@ -1,6 +1,8 @@
 package com.example.demo.Mapper;
 
 import com.example.demo.Entity.Movie;
+import com.example.demo.Entity.MovieArea;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -25,6 +27,12 @@ public interface MovieMapper {
 
     @Update("update movie  set movie_site = #{site} where movie_id = #{id}")
     void updateMovieSite(String site, int id);
+
+    @Delete("delete  from movie where movie_id=#{movieId}")
+    void deleteMovieByAdmin(int movieId);
+
+    @Select("select movie_name,movie_time,movie_site from movie where movie_area=#{Area}")
+    List<MovieArea> getAllMovieArea(String Area);
 
     @Select("select * from movie where movie_kind =#{MovieKind};")
     List<Movie> getAllMovieByMovieKind(String MovieKind);
