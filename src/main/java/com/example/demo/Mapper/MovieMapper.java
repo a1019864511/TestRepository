@@ -22,6 +22,9 @@ public interface MovieMapper {
     @Select("select * from movie")
     List<Movie> getAllMovie();
 
+    @Update("update movie set movie_time=#{movietime} where movie_id =#{movieId}")
+    void updateMovieTime(String movietime,long movieId);
+
     @Select("select * from movie where movie_id=#{id}")
     Movie getMovieByid(int id);
 

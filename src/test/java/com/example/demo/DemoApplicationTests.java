@@ -26,13 +26,20 @@ class DemoApplicationTests {
     MailMapper mailMapper;
 
     @Test
-    void contextLoads() {
-      List<Mail> lis= mail.getMailByUrl("https://book.douban.com/subject/24753651/discussion/58975313/");
-        List<Mail> lismail=new ArrayList<>();
+    void contextLoads() throws  Exception{
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat( "yyMMdd" );
+        SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+        long nowTime=formatter.parse(formatter.format( calendar.getTime() )).getTime();
+        List<Movie> lis=movieMapper.getAllMovie();
+        for(Movie li:lis){
+            long beforeTime =  formatter.parse(li.getMovieTime()).getTime();
+            if(nowTime>beforeTime){
+               String updateTime= formatter.format(beforeTime+ 24 * 60 * 60 * 1000L);
+               movieMapper.updateMovieTime(updateTime,li.getMovieId());
+            }
+        }
 
-    mailMapper.insertMail(lismail);
+
 
     }
 }

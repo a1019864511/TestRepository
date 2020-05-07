@@ -138,7 +138,27 @@ public class MovieController {
          */
 
     }
+    @ResponseBody
+    @RequestMapping("/updateMovieTime")
+    public String updateMovieTime() {
+        try{
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+            long nowTime=formatter.parse(formatter.format( calendar.getTime() )).getTime();
+            List<Movie> lis=moviemapper.getAllMovie();
+            for(Movie li:lis){
+                long beforeTime =  formatter.parse(li.getMovieTime()).getTime();
+                if(nowTime>beforeTime){
+                    String updateTime= formatter.format(beforeTime+ 24 * 60 * 60 * 1000L);
+                    moviemapper.updateMovieTime(updateTime,li.getMovieId());
+                }
+            }
+        }catch (Exception e){
+            return "程序遇到异常,执行失败";
+        }
+        return "更新时间成功";
 
+    }
     @RequestMapping("obscureGetMovie")
     private String  obscureGetMovie(@RequestParam("movieName") String movieName,
                                     Model model){
