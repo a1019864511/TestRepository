@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/webjars/jquery/3.4.1/jquery.js"></script>
+    <link rel="stylesheet"  href="/webjars/layui/2.5.6/css/layui.css">
+    <script src="/webjars/layui/2.5.6/layui.js"></script>
+    <script>
+        layui.use(['table','element'], function() {
+            var table = layui.table;
+            var element = layui.element;
+            var date='';
+            table.render({
+
+                elem:'#demo'
+                ,url:'/adminGetMailToSell/?url='
+                ,page:true
+                ,cols:[
+                    [
+                        {field:'email',title:'邮箱地址',},
+                        {field:'date',title:'日期',}
+                    ]
+                ]
+
+
+            })
+            $('#getMail').click(function(){
+                var mail = $("input[name='mail']").val();
+                table.render({
+                     elem:'#demo'
+                    ,url:'/adminGetMailToSell/?url='+mail
+                    ,page:true
+                    ,cols:[
+                        [
+                            {field:'email',title:'邮箱地址',},
+                            {field:'date',title:'日期',}
+                        ]
+                    ]
+                })
+            })
+            $('#sendMail').click(function(){
+                var sendto =$('input[name="senderMail"]').val();
+                var mail= $('textarea').val();
+                var data={'sendto':sendto,'mail':mail};
+                $.ajax({
+                    type:'post'
+                    ,url:'/sendMail'
+                    ,datatype:'json',
+                    data:JSON.stringify(data),
+                    success:function(obj){
+                        alert("数据成功交互")
+                    }
+                })
+
+            })
+        })
+    </script>
+</head>
+<input>
+<div class="layui-side layui-bg-black" th:include="/Admin/AdminShow::adminTwo"></div>
+<div class="layui-container">
+<span style="color:red;font-size: 20px">邮箱主题：</span><input name="mail" class="layui-input"/>
+    <button id="getMail">获取当前页面邮箱地址邮箱地址</button>
+    <div class="layui-row">
+        <div class="layui-col-md5">
+            <table id="demo" lay-filter="text"></table>
+        </div>
+        <div class="layui-col-md5">
+            <div><span>发送者邮箱</span><input value='1019864511@qq.com' name="senderMail"/></div>
+            <div>
+                <textarea rows="30" cols="40" >
+                    尊敬的客户您好,目前本影院还有大量电影票尚未出售,9折购买电影票请点击
+                    [https://www.baidu.com/s?ie=UTF-8&wd=textarea]
+                    另外本影院还有大量活动期待各位亲的到来--
+                    另外本影院还将举行,情人节亲吻活动。
+                    大量爆米花等您来领取。
+
+
+
+                    [以下为邮箱获取地址]
+                    [https://book.douban.com/subject/24753651/discussion/58975313/]
+                </textarea>
+            </div>
+            <div><button id="sendMail">send Email</button></div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

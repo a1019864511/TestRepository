@@ -190,5 +190,20 @@ public class MovieController {
         return formatter.format( calendar.getTime() );
     }
 
+//    public String updateMovieTime(){
+//      List<Movie> lis=  moviemapper.getAllMovie();
+//        SimpleDateFormat spf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date date1 = new Date();
+//        for(Movie li:lis){
+//          try {
+//              spf.parse(li.getMovieTime());
+//          }catch (Exception e){
+//              System.out.println("存在很多问题");
+//          }
+//
+//      }
+//        return "";
+//    }
+
 
 }

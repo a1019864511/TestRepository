@@ -8,7 +8,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import java.util.Random;
 
 /**
- * @Description:
+ * @Description:短信接口功能
  * @Author: Xingliu
  * @Verion: 1.0
  * @TIME:Created in 15:29 2020/5/6

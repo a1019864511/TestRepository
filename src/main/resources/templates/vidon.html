@@ -107,8 +107,8 @@
             <div class="layui-row layui-col-space20 layui-col-md-offset3" id="laycontent">
                 <div th:if="${List.size()}!=0">
                 <div class="layui-col-md4" th:each="movie:${List}">
-                    <div class="layui-col-md8"><img width="200" height="200" th:src="@{'/img/'+${movie.getMovieImgsrc()}}"/></div>
-                    <div class="layui-col-md4">
+                    <div class="layui-col-md7"><img width="200" height="200" th:src="@{'/img/'+${movie.getMovieImgsrc()}}"/></div>
+                    <div class="layui-col-md4" style="height: 200px">
                         <h3><span>影片:</span><span th:text="${movie.movieName}"></span></h3>
                         <div><span>播放时间:</span><span th:text="${movie.movieTime}"></span></div>
                         <div><span>导演:</span><span th:text="${movie.movieDirect}"></span></div>

@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.Entity.Admin;
+import com.example.demo.Entity.Mail;
 import com.example.demo.Entity.Movie;
 import com.example.demo.Entity.Table;
+import com.example.demo.Mapper.MailMapper;
 import com.example.demo.Mapper.MovieMapper;
 import com.example.demo.Mapper.UserMapper;
 import com.example.demo.Mapper.adminMapper;
+import com.example.demo.Services.MailService;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -37,6 +42,10 @@ public class Uploadimp {
     MovieMapper movieMapper;
     @Autowired
     adminMapper adminMapper;
+    @Autowired
+    MailMapper mailMapper;
+    @Autowired
+    MailService mailService;
 
     @ResponseBody
     @RequestMapping("/upload")
@@ -102,4 +111,33 @@ public class Uploadimp {
         table.setCode(0);
         return table;
     }
+
+    @ResponseBody
+    @GetMapping("/adminGetMailToSell")
+    public Table adminGetMailToSell(@RequestParam(value = "url") String mail){
+        System.out.println(mail);
+        Table table = new Table();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat( "yyMMdd" );
+        String data=formatter.format(calendar.getTime());
+        if(mail.length()==0 || ("").equals(mail)){
+            List<Mail> lis = mailMapper.getTodayMail(data);
+            table.setData(lis);
+            table.setCount(lis.size());
+            table.setCode(0);
+            return table;
+        }
+        //根据传过来的邮箱地址插入数据库并且返回相应的List对象
+        List<Mail> lis=mailService.getMailByUrl(mail);
+        if(!(lis.size()==0)){
+            mailMapper.insertMail(lis);
+        }
+        table.setData(lis);
+        table.setCount(lis.size());
+        table.setCode(0);
+        return table;
+    }
+
+
+
 }

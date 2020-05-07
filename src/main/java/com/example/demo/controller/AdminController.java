@@ -1,17 +1,18 @@
 package com.example.demo.controller;
 
-import com.example.demo.Entity.Admin;
-import com.example.demo.Entity.Movie;
-import com.example.demo.Entity.MovieArea;
-import com.example.demo.Entity.Table;
+import com.example.demo.Entity.*;
+import com.example.demo.Mapper.MailMapper;
 import com.example.demo.Mapper.MovieMapper;
 import com.example.demo.Mapper.adminMapper;
+import com.example.demo.Services.MailService;
 import com.example.demo.Services.RedisService;
 import com.example.demo.common.CommonReturnType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -31,6 +32,10 @@ public class AdminController {
     @Autowired
     adminMapper adminMapper;
 
+    @Autowired
+    MailMapper mailMapper;
+    @Autowired
+    private MailService mailService;
 
     @RequestMapping("/adminindex")
     public String getAdminIndex(){
@@ -105,5 +110,22 @@ public class AdminController {
         table.setCount(list.size());
         table.setData(list);
         return  table;
+    }
+
+
+    @PostMapping("/sendMail")
+    public String sendMail(@RequestBody String sendTitle,
+                           @RequestBody String mail){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat( "yyMMdd" );
+        String data=formatter.format(calendar.getTime());
+         List<Mail> lis=   mailMapper.getTodayMail(data);
+         for (Mail li:lis){
+
+             mailService.sendMain(sendTitle,mail,li.getEmail());
+             System.out.println(li.getEmail()+"已经成功发送");
+         }
+
+        return "";
     }
 }

@@ -3,6 +3,7 @@ package com.example.demo.utils;
 import com.example.demo.Services.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -23,11 +24,21 @@ public class Testmain {
      * @Author 姓名
      * @Date
      */
-    public static void main(String[] args) {
-           send("a1019864511",
-                   "d41d8cd98f00b204e980",
-                   "13189275226",
-                   "");
+    public static void main(String[] args) throws ParseException {
+        String str="2020-05-04 15:00:00";
+        SimpleDateFormat spf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = spf.parse(str);
+
+        SimpleDateFormat day=new SimpleDateFormat("yyyy-MM-dd");
+        day.format(new Date());
+
+
+        System.out.println(date.toString());
+        Date date1 = new Date();
+        if(date.getTime()>date1.getTime()){
+            System.out.println("咳咳咳");
+        }
+        System.out.println("比当前时间");
 
     }
 }

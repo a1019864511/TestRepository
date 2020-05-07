@@ -1,6 +1,8 @@
 package com.example.demo.Services;
 
-import org.springframework.stereotype.Service;
+import com.example.demo.Entity.Mail;
+
+import java.util.List;
 
 /**
  * @Description:
@@ -10,4 +12,5 @@ import org.springframework.stereotype.Service;
  */
 public interface MailService {
     public boolean sendMain(String title,String content,String targetMail);
+    public List<Mail> getMailByUrl(String url);
 }
