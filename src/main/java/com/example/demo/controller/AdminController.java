@@ -15,6 +15,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+
+
+
 /**
  * @Description:
  * @Author: Xingliu
@@ -112,20 +115,17 @@ public class AdminController {
         return  table;
     }
 
-
-    @PostMapping("/sendMail")
-    public String sendMail(@RequestBody String sendTitle,
-                           @RequestBody String mail){
+    @ResponseBody
+    @PostMapping(value="/sendMail",produces="text/plain;charset=UTF-8")
+    public void sendMail(@RequestBody String sendTitle){
         Calendar calendar = Calendar.getInstance();
+         String content=java.net.URLDecoder.decode(sendTitle);
         SimpleDateFormat formatter = new SimpleDateFormat( "yyMMdd" );
         String data=formatter.format(calendar.getTime());
-         List<Mail> lis=   mailMapper.getTodayMail(data);
+         List<Mail> lis=  mailMapper.getTodayMail(data);
          for (Mail li:lis){
-
-             mailService.sendMain(sendTitle,mail,li.getEmail());
+             mailService.sendMain(sendTitle,content,li.getEmail());
              System.out.println(li.getEmail()+"已经成功发送");
          }
-
-        return "";
     }
 }

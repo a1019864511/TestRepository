@@ -120,6 +120,7 @@ public class Uploadimp {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat( "yyMMdd" );
         String data=formatter.format(calendar.getTime());
+
         if(mail.length()==0 || ("").equals(mail)){
             List<Mail> lis = mailMapper.getTodayMail(data);
             table.setData(lis);

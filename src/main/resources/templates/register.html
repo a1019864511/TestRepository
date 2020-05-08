@@ -13,6 +13,14 @@
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
     <link rel="stylesheet" th:href="@{css/style.default.css}" id="theme-stylesheet">
+    <script>
+        $(function () {
+            $('#select').click(function () {
+                var href= '/obscureGetMovie/?movieName='+$('#selecttest').val();
+                window.location.href=href;
+            })
+        })
+    </script>
 </head>
 <body>
 <div class="page login-page">

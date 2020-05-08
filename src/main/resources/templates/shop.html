@@ -13,7 +13,14 @@
             var element = layui.element;
         });
     </script>
-
+    <script>
+        $(function () {
+            $('#select').click(function () {
+                var href= '/obscureGetMovie/?movieName='+$('#selecttest').val();
+                window.location.href=href;
+            })
+        })
+    </script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">

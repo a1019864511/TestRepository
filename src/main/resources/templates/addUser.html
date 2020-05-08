@@ -14,6 +14,14 @@
         });
 
     </script>
+    <script>
+        $(function () {
+            $('#select').click(function () {
+                var href= '/obscureGetMovie/?movieName='+$('#selecttest').val();
+                window.location.href=href;
+            })
+        })
+    </script>
     <script src="/webjars/jquery/3.4.1/jquery.js"></script>
     <script th:inline="javascript">
         $(function () {
@@ -42,7 +50,7 @@
             })
 
             $('#login').click(function () {
-                alert([[${movie.movieId}]])
+
                 var site = $('#tianjia').text();
                 $.ajax({
                     type: 'post',
@@ -56,7 +64,7 @@
                         "money": [[${movie.moviePrice}]] * count
                     },
                     success: function (obj) {
-                        alert(obj)
+                       alert("恭喜您购买成功");
                         $('button').each(function () {
                             //绑定每一个按钮,判断座位字符串里面是否包含
                             if (obj.indexOf($(this).text()) >= 0) {

@@ -88,6 +88,7 @@ public class UserController {
             session.setAttribute( "name", "login" );
             session.setAttribute( "user", checkUser.getUserName() );
             session.setAttribute( "userbyid", checkUser.getUserId() );
+            session.setAttribute( "userImgsrc", checkUser.getUserImgsrc() );
             data.setMessage( "成功登陆" );
             data.setCode( "1" );
             return data;

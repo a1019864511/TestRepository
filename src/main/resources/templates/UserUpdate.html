@@ -16,6 +16,14 @@
 
 
 </script>
+<script>
+    $(function () {
+        $('#select').click(function () {
+            var href= '/obscureGetMovie/?movieName='+$('#selecttest').val();
+            window.location.href=href;
+        })
+    })
+</script>
 <script th:inline="javascript">
     // var username = [[${usershow.userName}]];//获取名字
     // var telphone = [[${usershow.userPhone}]];

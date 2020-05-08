@@ -32,8 +32,6 @@ public class OrderController {
     }
 
 
-
-
     @ResponseBody
     @RequestMapping("/dataOrder/{id}")
     public Table getOrderListById(@PathVariable("id") String id) {
