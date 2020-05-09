@@ -18,7 +18,7 @@ public class ErrorController {
     public String error_400(){
         return "comm/error_404";
     }
-    //少思情欲，老悟生死
+
 
     @GetMapping(value = "/500")
     public String error_500(){
