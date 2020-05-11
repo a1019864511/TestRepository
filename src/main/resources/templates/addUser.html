@@ -48,6 +48,13 @@
                 $('#tianjia').html(text);
                 $('#price').text([[${movie.moviePrice}]] * count);
             })
+            $('#submitComments').click(function () {
+               var comment=  $('textarea').val();
+               var userId=[[${session.userbyid}]];
+               var MovieId= [[${movie.movieId}]];
+                $.get('/updateDiscuss/?comment='+comment+'&userId='+userId+'&movieId='+MovieId)
+
+            })
 
             $('#login').click(function () {
 
@@ -254,8 +261,8 @@
                 <hr class="layui-bg-red">
                 <div id="price" style="font-size: 40px;height:60%"></div>
                 <div><a id="login" class="layui-btn" style="margin-left: 50px" href="#"/>提交</a></div>
-            </div>
 
+            </div>
         </div>
         <div>
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
@@ -266,6 +273,7 @@
                 <div class="layui-input-block">
                     <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
                 </div>
+                <div style="text-align: center">  <button id="submitComments" class="layui-btn layui-btn-danger">提交评论</button></div>
             </div>
 
         </div>

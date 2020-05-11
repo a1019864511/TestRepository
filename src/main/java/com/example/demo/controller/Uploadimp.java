@@ -4,10 +4,7 @@ import com.example.demo.Entity.Admin;
 import com.example.demo.Entity.Mail;
 import com.example.demo.Entity.Movie;
 import com.example.demo.Entity.Table;
-import com.example.demo.Mapper.MailMapper;
-import com.example.demo.Mapper.MovieMapper;
-import com.example.demo.Mapper.UserMapper;
-import com.example.demo.Mapper.adminMapper;
+import com.example.demo.Mapper.*;
 import com.example.demo.Services.MailService;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -46,6 +44,8 @@ public class Uploadimp {
     MailMapper mailMapper;
     @Autowired
     MailService mailService;
+    @Autowired
+    discussMapper discussMapper;
 
     @ResponseBody
     @RequestMapping("/upload")
@@ -99,7 +99,18 @@ public class Uploadimp {
         table.setCode(0);
         return table;
     }
+    @ResponseBody
+    @GetMapping("/updateDiscuss")
+    public void updateDiscuss(@RequestParam("comment") String comment,
+                              @RequestParam("userId") String userId,
+                              @RequestParam("movieId") String movieId){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date=df.format(new Date());
+        System.out.println(date+"---"+comment+"---"+userId+"---"+movieId);
+         discussMapper.updateDisscuss(comment,Integer.parseInt(userId),Integer.parseInt(movieId),date);
 
+
+    }
 
     @ResponseBody
     @GetMapping("/getAllAdmin")
