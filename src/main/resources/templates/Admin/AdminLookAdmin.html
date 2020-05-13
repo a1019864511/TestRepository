@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .layui-table-cell {
+            height: auto !important;
+
+        }
+    </style>
+    <script src="/webjars/jquery/3.4.1/jquery.js"></script>
+    <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css">
+    <script src="/webjars/layui/2.5.6/layui.js"></script>
+    <script>
+        layui.use(['layer','element','table'], function(){
+            var layer = layui.layer;
+            var table = layui.table;
+            table.render({
+                elem: '#demo',
+                url: '/getAllAdmin',
+                page: true //开启分页
+                ,cols: [
+                    [
+                        {field:'adminUsername',title:'用户名'}
+                        ,{field:'adminPassword',title:'密码'}
+                        ,{field:'adminCompetence',title:'管理员的等级'}
+                        ,{field:'adminId',title:'管理员生成的随机ID'}
+
+                    ]
+                ]
+                ,parseData: function(res){ //将原始数据解析成 table 组件所规定的数据，res为从url中get到的数据
+                    var result;
+                    console.log(this);
+                    console.log(JSON.stringify(res));
+                    if(this.page.curr){
+                        result = res.data.slice(this.limit*(this.page.curr-1),this.limit*this.page.curr);
+                    }
+                    else{
+                        result=res.data.slice(0,this.limit);
+                    }
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.count, //解析数据长度
+                        "data": result //解析数据列表
+                    };
+                }
+
+        })
+
+
+        });
+        //当你带着目的去做一件事的时候
+    </script>
+</head>
+<body class="layui-body">
+<div class="layui-side layui-bg-black" th:include="/Admin/AdminShow::adminTwo"></div>
+       <table id="demo" lay-filter="text"></table>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">信息提交</a>
+</script>
+</body>
+</html>

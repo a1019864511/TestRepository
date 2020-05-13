@@ -115,6 +115,10 @@ public class AdminController {
         return  table;
     }
 
+    @GetMapping("adminLookAdmin")
+    public String  adminLookAdmin(){
+        return "Admin/AdminLookAdmin";
+    }
     @ResponseBody
     @PostMapping(value="/sendMail",produces="text/plain;charset=UTF-8")
     public void sendMail(@RequestBody String sendTitle){

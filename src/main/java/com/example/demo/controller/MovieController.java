@@ -68,7 +68,7 @@ public class MovieController {
     @RequestMapping("/shop/{id}")
     public String shop(@PathVariable("id") int id, Model model) {
         //修复当电影座位为空的时候导致前端有bug无法增加座位的bug
-        Movie movie=moviemapper.getMovieByid( id );
+        Movie movie=moviemapper.getMovieByid(id );
         if(movie.getMovieSite()==null){
             movie.setMovieSite("");
         };

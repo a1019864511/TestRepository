@@ -27,4 +27,6 @@ public interface MailMapper {
 
     @Select("select * from mail where date=#{date}")
     List<Mail> getTodayMail(String date);
+
+
 }

@@ -6,6 +6,12 @@
     <script src="/webjars/jquery/3.4.1/jquery.js"></script>
     <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css">
     <script src="/webjars/layui/2.5.6/layui.js"></script>
+    <style type="text/css">
+        .layui-table-cell {
+            height: auto !important;
+            width: auto;
+        }
+    </style>
     <script>
         layui.use('element', function () {
             var element = layui.element;
@@ -109,7 +115,7 @@
     </script>
 
     <script type="text/html" id="imgsrc">
-        <img height="200" src="/img/{{d.movieImgsrc}}"/>
+        <img src="/img/{{d.movieImgsrc}}"/>
     </script>
 </head>
 

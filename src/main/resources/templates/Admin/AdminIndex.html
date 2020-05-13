@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
+    <style type="text/css">
+        .layui-table-cell {
+            height: auto !important;
+            width: auto;
+        }
+    </style>
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="/webjars/jquery/3.4.1/jquery.js"></script>
@@ -16,7 +23,7 @@
     <script>
         $(function () {
             $("#test").click(function(){
-                alert('进来了额')
+
                 var user=$("input[name='adminUsername']").val();
                 var password=$("input[name='adminPassword']").val();
                 alert(user+password);
@@ -49,17 +56,18 @@
 <body>
 <h2 style="text-align: center">欢迎来到威威影院后台管理系统</h2>
 <div class="middle layui-row">
-<div class="layui-col-md8">
-</div>
 
-<div  class="layui-col-md4">
 
+
+    <div style="text-align: center;">
+        <div style="height: 200px;width: 200px;margin: auto;border: 1px solid red">
     <div> <span>用户名</span><input name="adminUsername"/></div>
     <div> <span>密码</span><input name="adminPassword"/></div>
     <button  id="test">提交</button>
+        </div>
+    </div>
+</div>
 
-</div>
-</div>
 
 
 </body>
