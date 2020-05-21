@@ -5,7 +5,7 @@ import com.example.demo.Mapper.MailMapper;
 import com.example.demo.Mapper.MovieMapper;
 import com.example.demo.Mapper.adminMapper;
 import com.example.demo.Services.MailService;
-import com.example.demo.Services.RedisService;
+
 import com.example.demo.common.CommonReturnType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +27,7 @@ import java.util.List;
 
 @Controller
 public class AdminController {
-    @Autowired
-    private RedisService redisService;
+
     @Autowired
     MovieMapper movieMapper;
 
@@ -42,8 +41,7 @@ public class AdminController {
 
     @RequestMapping("/adminindex")
     public String getAdminIndex(){
-        redisService.set("11","从缓存获取数据");
-        System.out.println(redisService.get("11"));
+
         return "/Admin/AdminIndex";
     }
 

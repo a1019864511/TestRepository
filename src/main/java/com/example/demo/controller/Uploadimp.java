@@ -103,7 +103,7 @@ public class Uploadimp {
     @GetMapping("/updateDiscuss")
     public void updateDiscuss(@RequestParam("comment") String comment,
                               @RequestParam("userId") String userId,
-                              @RequestParam("movieId") String movieId){
+                              @RequestParam(" ovieId") String movieId){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date=df.format(new Date());
         System.out.println(date+"---"+comment+"---"+userId+"---"+movieId);

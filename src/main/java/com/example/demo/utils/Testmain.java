@@ -1,6 +1,6 @@
 package com.example.demo.utils;
 
-import com.example.demo.Services.RedisService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.ParseException;
@@ -16,8 +16,7 @@ import static com.example.demo.utils.SendMessageutil.send;
  * @TIME 2020/4/16
  */
 public class Testmain {
-    @Autowired
-    private RedisService redisService;
+
 
     /**
      * @Description:
